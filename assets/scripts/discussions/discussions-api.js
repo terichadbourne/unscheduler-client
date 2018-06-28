@@ -4,14 +4,17 @@
 const config = require('../config')
 const store = require('../store')
 
-// // make a call to the server to create a new discussion
-// const createDiscussion = function (data) {
-//   return $.ajax({
-//     method: 'POST',
-//     url: config.apiUrl + '/discussions',
-//     data: data
-//   })
-// }
+// make a call to the server to create a new discussion
+const createDiscussion = function (data) {
+  return $.ajax({
+    method: 'POST',
+    url: config.apiUrl + '/discussions',
+    data: data,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 //
 // // make a call to server to update a discussion
 // const updateDiscussion = function (data) {
@@ -56,7 +59,7 @@ const getDiscussions = function () {
 module.exports = {
   // deleteDiscussion: deleteDiscussion,
   // updateDiscussion: updateDiscussion,
-  // createDiscussion: createDiscussion,
+  createDiscussion: createDiscussion,
   // getDiscussion: getDiscussion,
   getDiscussions: getDiscussions
 }
