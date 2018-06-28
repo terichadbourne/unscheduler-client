@@ -12,4 +12,5 @@ const discussionsEvents = require('./discussions/discussions-events')
 $(() => {
   authEvents.addHandlers()
   discussionsEvents.addHandlers()
+  discussionsEvents.onGetDiscussions()
 })
