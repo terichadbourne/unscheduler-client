@@ -7,7 +7,7 @@ const getDiscussionsSuccess = function (response) {
   console.log('response.discussions from getDiscussionSuccess is: ', response.discussions)
   const discussionsArray = response.discussions
   console.log('number of discussions found: ', discussionsArray.length)
-  if (discussionsArray.length === 1) {
+  if (discussionsArray.length === 0) {
     $('.discussion-list').html('No sessions to display. Have a topic to propose?')
   } else {
     $('.discussion-list').html('')
