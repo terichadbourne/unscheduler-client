@@ -59,18 +59,21 @@ const changePasswordError = function (error) {
 
 // run on successful sign-outline (note no response expected from server)
 const signOutSuccess = function (response) {
-  // reset game board, form fields, win/player stats, and button states
-  $('.game-cell').html('')
+  // remove user record and token from `store`
+  delete store.user
+  // clear messages
   ui.clearMessage()
   // change which auth options are available
   $('.sign-up').removeClass('hidden')
   $('.sign-in').removeClass('hidden')
   $('.sign-out').addClass('hidden')
   $('.change-password').addClass('hidden')
+  // refresh list of discussions to remove editable status
+  discussionsEvents.onGetDiscussions()
   // show success message
   showAuthMessage("Success! You've been signed out.")
   setTimeout(clearAuthMessage, 3000)
-  // ask user to sign in for next game
+  // ask user to sign in
   setTimeout(() => {
     showAuthMessage('You must sign in to add session proposals.')
   }, 3001)
