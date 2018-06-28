@@ -50,10 +50,23 @@ const createDiscussion = function (data) {
 // make a call to server to get all discussions
 const getDiscussions = function () {
   console.log('in getDiscussions')
-  return $.ajax({
-    method: 'GET',
-    url: config.apiUrl + `/discussions/`
-  })
+
+  if (store.user) {
+    console.log('sending token with request')
+    return $.ajax({
+      method: 'GET',
+      url: config.apiUrl + `/discussions/`,
+      headers: {
+        Authorization: 'Token token=' + store.user.token
+      }
+    })
+  } else {
+    console.log('no token to send with request')
+    return $.ajax({
+      method: 'GET',
+      url: config.apiUrl + `/discussions/`
+    })
+  }
 }
 
 module.exports = {
