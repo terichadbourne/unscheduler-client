@@ -2,6 +2,7 @@
 // require dependencies
 const ui = require('../ui')
 const store = require('../store')
+const discussionsEvents = require('../discussions/discussions-events')
 
 // run on sign up error
 const signUpError = function (error) {
@@ -28,6 +29,8 @@ const signInSuccess = function (response) {
   clearAuthForms()
   $('#signInModal').modal('hide')
   $('#signUpModal').modal('hide')
+  // refresh list of discussions to get accurate editable values
+  discussionsEvents.onGetDiscussions()
 }
 
 // run on sign-in error
