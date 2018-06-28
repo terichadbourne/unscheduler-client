@@ -2,7 +2,7 @@
 
 let apiUrl
 const apiUrls = {
-  production: 'https://unscheduler-api.herokuapp.com/',
+  production: 'https://unscheduler-api.herokuapp.com',
   development: 'http://localhost:4741'
 }
 
