@@ -1,2 +1,79 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'colors';
+
+a {
+  color: $pure-white;
+}
+
+body {
+  background-color: $pure-white;
+  text-align: center;
+}
+
+button {
+  border-color: $pure-black;
+  border-radius: 10px;
+  color: $pure-black;
+  display: block;
+  font-size: 16px;
+  margin: 10px auto;
+}
+
+nav button {
+  background-color: $pure-white;
+  border: thick solid $pure-white;
+  color: $pure-black;
+  float: right;
+  margin: 10px;
+}
+
+footer {
+  background-color: $pure-black;
+  bottom: 0;
+  color: $pure-white;
+  height: 30px;
+  left: 0;
+  line-height: 30px;
+  position: fixed;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+
+input {
+  display: block;
+  margin: 5px auto;
+}
+
+nav {
+  background-color: $pure-black;
+  color: $pure-white;
+  margin: 0;
+}
+
+.auth-alert-main,
+.auth-alert-modal {
+  color: $pure-black;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+#message {
+  color: $pure-black;
+  font-size: 18px;
+  padding: 5px;
+  text-align: center;
+}
