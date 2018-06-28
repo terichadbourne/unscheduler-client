@@ -29,12 +29,39 @@
           <section class="discussions">
             <h1>Proposed Sessions</h1>
             <button class="list-discussions">Refresh List</button>
+            <button class="propose-topic" data-toggle="modal" data-target="#proposeTopicModal" type="button">Propose a Topic</button>
             <div class="discussion-list"></div>
           </section>
         </main>
         <footer class="row">
           <p><em>Built by <a href="https://github.com/terichadbourne">Teri Chadbourne</a></em></p>
         </footer>
+
+        <!-- PROPOSE TOPIC Modal -->
+        <div class="modal fade" id="proposeTopicModal" tabindex="-1" role="dialog" aria-labelledby="proposeTopicModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="proposeTopicModalLabel">Propose Topic</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="propose-topic-form">
+                  <input name="title" placeholder='Session Topic' type='text' required/>
+                </form>
+                <p class="auth-alert-modal"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="submit" form="propose-topic-form">Submit Topic Proposal</button>
+                <p class="auth-alert"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <!-- CHANGE PASSWORD Modal -->
         <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
