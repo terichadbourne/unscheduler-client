@@ -1,6 +1,7 @@
 'use strict'
 // require dependencies
 const ui = require('../ui')
+const showDiscussionsTemplate = require('../templates/discussions-listing.handlebars')
 // const store = require('../store')
 
 const getDiscussionsSuccess = function (response) {
@@ -10,15 +11,12 @@ const getDiscussionsSuccess = function (response) {
   // clear values from proposal form
   $('#propose-topic-form > input').val('')
   console.log('response.discussions from getDiscussionSuccess is: ', response.discussions)
-  const discussionsArray = response.discussions
-  console.log('number of discussions found: ', discussionsArray.length)
-  if (discussionsArray.length === 0) {
+  console.log(`data from getDiscussionsSuccess is ${response}`)
+  if (response.discussions.length === 0) {
     $('.discussion-list').html('No sessions to display. Have a topic to propose?')
   } else {
-    $('.discussion-list').html('')
-    discussionsArray.forEach((discussion) => {
-      $('.discussion-list').append(`<li>${discussion.title} (Editable: ${discussion.editable})</li>`)
-    })
+    const showDiscussionsHtml = showDiscussionsTemplate({ discussions: response.discussions })
+    $('.discussion-list').html(showDiscussionsHtml)
   }
 }
 
