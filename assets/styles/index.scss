@@ -20,6 +20,10 @@ button {
   margin: 10px auto;
 }
 
+button.edit {
+  font-size: 12px;
+}
+
 nav button {
   background-color: $pure-white;
   border: thick solid $pure-white;
@@ -61,6 +65,10 @@ nav {
 
 .container-fluid {
   padding: 0;
+}
+
+.discussions button {
+  display: inline;
 }
 
 .hidden {

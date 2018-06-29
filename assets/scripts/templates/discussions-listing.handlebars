@@ -1,0 +1,10 @@
+{{#each discussions as |discussion|}}
+  {{log discussion}}
+
+  <li data-id="{{discussion.id}}">
+    <strong>{{discussion.title}}</strong>
+    {{#if discussion.editable}}
+      <button class="edit" data-id="{{discussion.id}}">Edit or Remove</button>
+    {{/if}}
+  </li>
+{{/each}}
