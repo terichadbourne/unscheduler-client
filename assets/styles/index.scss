@@ -20,7 +20,11 @@ button {
   margin: 10px auto;
 }
 
-button.edit {
+button.edit, button.remove {
+  color: $pure-white;
+}
+
+button.update-topic {
   font-size: 12px;
 }
 
@@ -71,12 +75,20 @@ nav {
   display: inline;
 }
 
+.edit {
+  background-color: green;
+}
+
 .hidden {
   display: none;
 }
 
 .navbar {
   margin-bottom: 0;
+}
+
+.remove {
+  background-color: red;
 }
 
 #message {
