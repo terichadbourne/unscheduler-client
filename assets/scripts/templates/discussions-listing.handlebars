@@ -1,10 +1,16 @@
 {{#each discussions as |discussion|}}
   {{log discussion}}
 
-  <li data-id="{{discussion.id}}">
-    <strong>{{discussion.title}}</strong>
-    {{#if discussion.editable}}
-      <button class="update-topic" data-toggle="modal" data-target="#udpateTopicModal" data-id="{{discussion.id}}" type="button">Modify</button>
-    {{/if}}
-  </li>
+  {{#if discussion.editable}}
+    <tr data-id="{{discussion.id}}" class="table-primary">
+      <td><button class="update-topic" data-toggle="modal" data-target="#udpateTopicModal" data-id="{{discussion.id}}" type="button">Modify</button></td>
+      <td>{{discussion.title}}</td>
+    </tr>
+  {{else}}
+    <tr data-id="{{discussion.id}}" class="table-secondary">
+      <td></td>
+      <td>{{discussion.title}}</td>
+    </tr>
+  {{/if}}
+
 {{/each}}
