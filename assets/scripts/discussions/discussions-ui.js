@@ -35,9 +35,6 @@ const createDiscussionError = function (error) {
   $('#propose-topic-form > input').val('')
 }
 
-const deleteDiscussionSuccess = function(response) {
-  console.log('in deleteDiscussionSuccess')
-}
 const deleteDiscussionError = function (error) {
   console.log('in deleteDiscussionError')
   ui.showMessage('Error deleting session from database.')
@@ -47,6 +44,5 @@ module.exports = {
   getDiscussionsSuccess: getDiscussionsSuccess,
   getDiscussionsError: getDiscussionsError,
   createDiscussionError: createDiscussionError,
-  deleteDiscussionSuccess: deleteDiscussionSuccess,
   deleteDiscussionError: deleteDiscussionError
 }
