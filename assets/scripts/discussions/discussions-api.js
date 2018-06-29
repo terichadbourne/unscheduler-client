@@ -40,14 +40,24 @@ const deleteDiscussion = function (id) {
     }
   })
 }
-//
-// // make a call to server to get a specific discussion
-// const getDiscussion = function (id) {
-//   return $.ajax({
-//     method: 'GET',
-//     url: config.apiUrl + `/discussions/${id}`
-//   })
-// }
+
+// make a call to server to get a specific discussion
+const getDiscussion = function (id) {
+  if (store.user) {
+    return $.ajax({
+      method: 'GET',
+      url: config.apiUrl + `/discussions/${id}`,
+      headers: {
+        Authorization: 'Token token=' + store.user.token
+      }
+    })
+  } else {
+    return $.ajax({
+      method: 'GET',
+      url: config.apiUrl + `/discussions/${id}`
+    })
+  }
+}
 
 // make a call to server to get all discussions
 const getDiscussions = function () {
@@ -75,6 +85,6 @@ module.exports = {
   deleteDiscussion: deleteDiscussion,
   // updateDiscussion: updateDiscussion,
   createDiscussion: createDiscussion,
-  // getDiscussion: getDiscussion,
+  getDiscussion: getDiscussion,
   getDiscussions: getDiscussions
 }
