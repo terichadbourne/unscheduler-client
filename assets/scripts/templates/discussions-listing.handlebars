@@ -4,7 +4,7 @@
   <li data-id="{{discussion.id}}">
     <strong>{{discussion.title}}</strong>
     {{#if discussion.editable}}
-      <button class="edit" data-id="{{discussion.id}}">Edit or Remove</button>
+      <button class="update-topic" data-toggle="modal" data-target="#udpateTopicModal" data-id="{{discussion.id}}" type="button">Modify</button>
     {{/if}}
   </li>
 {{/each}}

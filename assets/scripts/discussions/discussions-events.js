@@ -9,6 +9,34 @@ const addHandlers = function () {
   // auth-related buttons
   $('.list-discussions').on('click', onGetDiscussions)
   $('#propose-topic-form').on('submit', onCreateDiscussion)
+  $('.discussion-list').on('click', '.update-topic', refreshUpdateModal)
+  $('#update-topic-form').on('submit', onUpdateDiscussion)
+  $('.remove').on('click', onDeleteDiscussion)
+}
+
+const refreshUpdateModal = function (event) {
+  $('#updateTopicModal, button.remove, button.edit, #update-topic-form').data('id', $(event.target).data('id'))
+  $('#updateTopicModal').modal('show')
+  console.log("$('#updateTopicModal').data('id') is ", $('#updateTopicModal').data('id'))
+  console.log("$('button.remove').data('id') is ", $('button.remove').data('id'))
+  console.log("$('button.edit').data('id') is ", $('button.edit').data('id'))
+  console.log("$('#update-topic-form').data('id') is ", $('#update-topic-form').data('id'))
+}
+
+const onUpdateDiscussion = function (event) {
+  // prevent page refresh
+  event.preventDefault()
+  console.log('in onUpdateDiscussion')
+  console.log('$(event.target) is ', $(event.target))
+  const id = $(event.target).data('id')
+  console.log(id)
+}
+
+const onDeleteDiscussion = function (event) {
+  console.log('in onDeleteDiscussion')
+  console.log('$(event.target) is ', $(event.target))
+  const id = $(event.target).data('id')
+  console.log(id)
 }
 
 // refresh discussion list
@@ -42,5 +70,7 @@ const onGetDiscussions = function (event) {
 
 module.exports = {
   addHandlers: addHandlers,
-  onGetDiscussions: onGetDiscussions
+  onGetDiscussions: onGetDiscussions,
+  onUpdateDiscussion: onUpdateDiscussion,
+  onDeleteDiscussion: onDeleteDiscussion
 }
