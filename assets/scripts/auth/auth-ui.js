@@ -31,6 +31,7 @@ const signInSuccess = function (response) {
   $('#signUpModal').modal('hide')
   // refresh list of discussions to get accurate editable values
   discussionsEvents.onGetDiscussions()
+  $('.propose-topic').removeClass('hidden')
 }
 
 // run on sign-in error
@@ -59,10 +60,11 @@ const changePasswordError = function (error) {
 
 // run on successful sign-outline (note no response expected from server)
 const signOutSuccess = function (response) {
+  $('.propose-topic').addClass('hidden')
   // remove user record and token from `store`
   delete store.user
   // clear messages
-  ui.clearMessage()
+  ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
   // change which auth options are available
   $('.sign-up').removeClass('hidden')
   $('.sign-in').removeClass('hidden')
@@ -73,10 +75,6 @@ const signOutSuccess = function (response) {
   // show success message
   showAuthMessage("Success! You've been signed out.")
   setTimeout(clearAuthMessage, 3000)
-  // ask user to sign in
-  setTimeout(() => {
-    showAuthMessage('You must sign in to add session proposals.')
-  }, 3001)
 }
 
 // run on sign-out error
