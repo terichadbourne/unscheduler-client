@@ -25,9 +25,10 @@
 
         <main>
           <p class="auth-alert-main"></p>
-          <p id="message">Want to add or edit a session topic? You'll need to sign in.</p>
+          <p id="message">Sign in to add or update session ideas.</p>
+
           <section class="discussions">
-            <h1>Proposed Sessions</h1>
+            <h2>Session Ideas</h2>
             <button class="list-discussions">Refresh List</button>
             <button class="propose-topic hidden" data-toggle="modal" data-target="#proposeTopicModal" type="button">Propose a Topic</button>
             <table class="table table-striped">
@@ -36,6 +37,7 @@
               </tbody >
             </table>
           </section>
+
         </main>
         <footer class="row">
           <p><em>Built by <a href="https://github.com/terichadbourne">Teri Chadbourne</a></em></p>
@@ -55,12 +57,10 @@
                 <form id="propose-topic-form">
                   <input name="title" placeholder='Session Topic' type='text' required/>
                 </form>
-                <p class="auth-alert-modal"></p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button class="btn btn-primary" type="submit" form="propose-topic-form">Submit Topic Proposal</button>
-                <p class="auth-alert"></p>
               </div>
             </div>
           </div>
@@ -80,13 +80,11 @@
                 <form id="update-topic-form">
                   <!-- content to be added via Handlebars -->
                 </form>
-                <p class="auth-alert-modal"></p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal">Close</button>
                 <button class="btn edit" type="submit" form="update-topic-form">Save Edits</button>
                 <button class="remove btn">Delete Proposal</button>
-                <p class="auth-alert"></p>
               </div>
             </div>
           </div>
