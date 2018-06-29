@@ -23,6 +23,11 @@ const getDiscussionsSuccess = function (response) {
   }
 }
 
+const getDiscussionError = function (error) {
+  console.log('in getDiscussionError')
+  ui.showMessage('Error retrieving that particular session from database.')
+}
+
 const getDiscussionsError = function (error) {
   console.log('in getDiscussionsError')
   ui.showMessage('Error retrieving all sessions from database.')
@@ -40,9 +45,21 @@ const deleteDiscussionError = function (error) {
   ui.showMessage('Error deleting session from database.')
 }
 
+const refreshUpdateModal = function (response) {
+  const id = response.discussion.id
+  console.log('id is: ', id)
+  $('#updateTopicModal, button.remove, button.edit, #update-topic-form').data('id', id)
+  $('#updateTopicModal').modal('show')
+  console.log("$('#updateTopicModal').data('id') is ", $('#updateTopicModal').data('id'))
+  console.log("$('button.remove').data('id') is ", $('button.remove').data('id'))
+  console.log("$('button.edit').data('id') is ", $('button.edit').data('id'))
+  console.log("$('#update-topic-form').data('id') is ", $('#update-topic-form').data('id'))
+}
 module.exports = {
   getDiscussionsSuccess: getDiscussionsSuccess,
   getDiscussionsError: getDiscussionsError,
+  getDiscussionError: getDiscussionError,
   createDiscussionError: createDiscussionError,
-  deleteDiscussionError: deleteDiscussionError
+  deleteDiscussionError: deleteDiscussionError,
+  refreshUpdateModal: refreshUpdateModal
 }

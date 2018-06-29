@@ -9,18 +9,18 @@ const addHandlers = function () {
   // auth-related buttons
   $('.list-discussions').on('click', onGetDiscussions)
   $('#propose-topic-form').on('submit', onCreateDiscussion)
-  $('.discussion-list').on('click', '.update-topic', refreshUpdateModal)
+  $('.discussion-list').on('click', '.update-topic', onGetDiscussion)
   $('#update-topic-form').on('submit', onUpdateDiscussion)
   $('.remove').on('click', onDeleteDiscussion)
 }
 
-const refreshUpdateModal = function (event) {
-  $('#updateTopicModal, button.remove, button.edit, #update-topic-form').data('id', $(event.target).data('id'))
-  $('#updateTopicModal').modal('show')
-  console.log("$('#updateTopicModal').data('id') is ", $('#updateTopicModal').data('id'))
-  console.log("$('button.remove').data('id') is ", $('button.remove').data('id'))
-  console.log("$('button.edit').data('id') is ", $('button.edit').data('id'))
-  console.log("$('#update-topic-form').data('id') is ", $('#update-topic-form').data('id'))
+const onGetDiscussion = function (event) {
+  console.log('in onGetDiscussion')
+  const id = $(event.target).data('id')
+  console.log(id)
+  discussionsApi.getDiscussion(id)
+    .then(discussionsUi.refreshUpdateModal)
+    .catch(discussionsUi.getDiscussionError)
 }
 
 const onUpdateDiscussion = function (event) {
@@ -78,9 +78,8 @@ const onGetDiscussions = function (event) {
 module.exports = {
   addHandlers: addHandlers,
   onGetDiscussions: onGetDiscussions,
+  onGetDiscussion: onGetDiscussion,
   onUpdateDiscussion: onUpdateDiscussion,
   onDeleteDiscussion: onDeleteDiscussion,
-  onCreateDiscussion: onCreateDiscussion,
-  refreshUpdateModal: refreshUpdateModal
-
+  onCreateDiscussion: onCreateDiscussion
 }
