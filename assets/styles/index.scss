@@ -26,6 +26,7 @@ button.edit, button.remove {
 
 button.update-topic {
   font-size: 12px;
+  margin: 5px;
 }
 
 nav button {
@@ -58,6 +59,13 @@ nav {
   background-color: $pure-black;
   color: $pure-white;
   margin: 0;
+}
+
+.table {
+  text-align: left;
+  max-width: 90%;
+  margin: auto;
+  border: 2px black solid;
 }
 
 .auth-alert-main,
