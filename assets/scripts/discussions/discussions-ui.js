@@ -2,6 +2,7 @@
 // require dependencies
 const ui = require('../ui')
 const showDiscussionsTemplate = require('../templates/discussions-listing.handlebars')
+const updateFormTemplate = require('../templates/update-topic-form.handlebars')
 // const store = require('../store')
 
 const getDiscussionsSuccess = function (response) {
@@ -48,7 +49,9 @@ const deleteDiscussionError = function (error) {
 const refreshUpdateModal = function (response) {
   const id = response.discussion.id
   console.log('id is: ', id)
-  $('#updateTopicModal, button.remove, button.edit, #update-topic-form').data('id', id)
+  const updateFormHtml = updateFormTemplate({ discussion: response.discussion })
+  $('#update-topic-form').html(updateFormHtml)
+  $('button.remove, button.edit').data('id', id)
   $('#updateTopicModal').modal('show')
   console.log("$('#updateTopicModal').data('id') is ", $('#updateTopicModal').data('id'))
   console.log("$('button.remove').data('id') is ", $('button.remove').data('id'))
