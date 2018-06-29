@@ -37,12 +37,19 @@ const onDeleteDiscussion = function (event) {
   console.log('$(event.target) is ', $(event.target))
   const id = $(event.target).data('id')
   console.log(id)
+  discussionsApi.deleteDiscussion(id)
+  // if delete discussion is successful, close modal and then immediately run
+  // getDiscussions to updatelist, calling that function's success function
+    .then(() => { return discussionsApi.getDiscussions() })
+    .then(discussionsUi.getDiscussionsSuccess)
+    // if create fails, use own error function
+    .catch(discussionsUi.deleteDiscussionError)
 }
 
 // refresh discussion list
 const onCreateDiscussion = function (event) {
   console.log('in onCreateDiscussion')
-  //prevent page refresh
+  // prevent page refresh
   event.preventDefault()
   // capture user credentials from form and send to server
   const data = {}
@@ -72,5 +79,8 @@ module.exports = {
   addHandlers: addHandlers,
   onGetDiscussions: onGetDiscussions,
   onUpdateDiscussion: onUpdateDiscussion,
-  onDeleteDiscussion: onDeleteDiscussion
+  onDeleteDiscussion: onDeleteDiscussion,
+  onCreateDiscussion: onCreateDiscussion,
+  refreshUpdateModal: refreshUpdateModal
+
 }

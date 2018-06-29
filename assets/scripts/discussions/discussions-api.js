@@ -28,16 +28,18 @@ const createDiscussion = function (data) {
 //   })
 // }
 //
-// // make a call to server to delete a discussion
-// const deleteDiscussion = function (id) {
-//   return $.ajax({
-//     method: 'DELETE',
-//     url: config.apiUrl + `/discussions/${id}`,
-//     headers: {
-//       Authorization: 'Token token=' + store.user.token
-//     }
-//   })
-// }
+
+// make a call to server to delete a discussion
+const deleteDiscussion = function (id) {
+  console.log('in deleteDiscussion trying to delete id: ', id)
+  return $.ajax({
+    method: 'DELETE',
+    url: config.apiUrl + `/discussions/${id}`,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 //
 // // make a call to server to get a specific discussion
 // const getDiscussion = function (id) {
@@ -70,7 +72,7 @@ const getDiscussions = function () {
 }
 
 module.exports = {
-  // deleteDiscussion: deleteDiscussion,
+  deleteDiscussion: deleteDiscussion,
   // updateDiscussion: updateDiscussion,
   createDiscussion: createDiscussion,
   // getDiscussion: getDiscussion,
