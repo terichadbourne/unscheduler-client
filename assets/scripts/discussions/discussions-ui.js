@@ -7,6 +7,8 @@ const getDiscussionsSuccess = function (response) {
   // if you were redirected to getDiscussionsSuccess from createDiscussion,
   // hide the open modal you used to submit the proposal
   $('#proposeTopicModal').modal('hide')
+  // clear values from proposal form
+  $('#propose-topic-form > input').val('')
   console.log('response.discussions from getDiscussionSuccess is: ', response.discussions)
   const discussionsArray = response.discussions
   console.log('number of discussions found: ', discussionsArray.length)
@@ -35,6 +37,8 @@ const getDiscussionsError = function (error) {
 const createDiscussionError = function (error) {
   console.log('in createDiscussionError')
   ui.showMessage('Error creating new discussion topic in database.')
+  // clear values from proposal form
+  $('#propose-topic-form > input').val('')
 }
 
 module.exports = {
