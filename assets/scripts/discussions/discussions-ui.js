@@ -34,6 +34,11 @@ const getDiscussionsError = function (error) {
   ui.showMessage('Error retrieving all sessions from database.')
 }
 
+const updateDiscussionError = function (error) {
+  console.log('in updateDiscussionError')
+  ui.showMessage('Error updating that discussion in database.')
+}
+
 const createDiscussionError = function (error) {
   console.log('in createDiscussionError')
   ui.showMessage('Error creating new discussion topic in database.')
@@ -51,7 +56,7 @@ const refreshUpdateModal = function (response) {
   console.log('id is: ', id)
   const updateFormHtml = updateFormTemplate({ discussion: response.discussion })
   $('#update-topic-form').html(updateFormHtml)
-  $('button.remove, button.edit').data('id', id)
+  $('button.remove, button.edit, #update-topic-form').data('id', id)
   $('#updateTopicModal').modal('show')
   console.log("$('#updateTopicModal').data('id') is ", $('#updateTopicModal').data('id'))
   console.log("$('button.remove').data('id') is ", $('button.remove').data('id'))
@@ -64,5 +69,6 @@ module.exports = {
   getDiscussionError: getDiscussionError,
   createDiscussionError: createDiscussionError,
   deleteDiscussionError: deleteDiscussionError,
+  updateDiscussionError: updateDiscussionError,
   refreshUpdateModal: refreshUpdateModal
 }

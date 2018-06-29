@@ -15,19 +15,18 @@ const createDiscussion = function (data) {
     }
   })
 }
-//
-// // make a call to server to update a discussion
-// const updateDiscussion = function (data) {
-//   return $.ajax({
-//     method: 'PATCH',
-//     url: config.apiUrl + `/discussions/${data.id}`,
-//     data: data,
-//     headers: {
-//       Authorization: 'Token token=' + store.user.token
-//     }
-//   })
-// }
-//
+
+// make a call to server to update a discussion
+const updateDiscussion = function (data) {
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiUrl + `/discussions/${data.discussion.id}`,
+    data: data,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 
 // make a call to server to delete a discussion
 const deleteDiscussion = function (id) {
@@ -83,7 +82,7 @@ const getDiscussions = function () {
 
 module.exports = {
   deleteDiscussion: deleteDiscussion,
-  // updateDiscussion: updateDiscussion,
+  updateDiscussion: updateDiscussion,
   createDiscussion: createDiscussion,
   getDiscussion: getDiscussion,
   getDiscussions: getDiscussions
