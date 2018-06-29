@@ -50,6 +50,10 @@ footer {
   width: 100%;
 }
 
+footer.row {
+  margin: 5px 0px 0px 0px;
+}
+
 input {
   display: block;
   margin: 5px auto;
@@ -104,4 +108,11 @@ nav {
   font-size: 18px;
   padding: 5px;
   text-align: center;
+}
+
+// override default
+@media (min-width: 768px) {
+  .navbar {
+    border-radius: 0;
+  }
 }
