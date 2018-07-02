@@ -23,13 +23,7 @@ const getDiscussionsSuccess = function (response) {
     if (response.discussions.length === 0) {
       $('.discussion-list').html('No sessions to display. Have a topic to propose?')
     } else {
-      console.log('store.user: ', store.user)
-      const discussions = response.discussions.map((discussion) => {
-        const userId = store.user.id
-        discussion.my_votes = discussion.vote_counts[userId]
-        return discussion
-      })
-      const showDiscussionsHtml = showDiscussionsTemplate({ discussions: discussions })
+      const showDiscussionsHtml = showDiscussionsTemplate({ discussions: response.discussions })
       $('.discussion-list').html(showDiscussionsHtml)
     }
     //if no one is logged in

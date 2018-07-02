@@ -18,8 +18,8 @@
       {{/if}}
       <td>{{discussion.title}}</td>
       <td>{{discussion.users.length}}</td>
-      {{#if discussion.my_votes}}
-        <td>{{discussion.my_votes}}</td>
+      {{#if discussion.current_user_votes}}
+        <td>{{discussion.current_user_votes}}</td>
       {{else}}
         <td>0</td>
       {{/if}}
