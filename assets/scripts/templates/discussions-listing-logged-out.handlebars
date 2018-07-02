@@ -1,0 +1,10 @@
+{{#each discussions as |discussion|}}
+  {{log discussion}}
+
+    <tr data-id="{{discussion.id}}" class="table-secondary">
+      <td></td>
+      <td>{{discussion.title}}</td>
+      <td>{{discussion.users.length}} Votes</td>
+    </tr>
+
+{{/each}}
