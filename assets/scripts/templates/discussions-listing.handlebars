@@ -1,16 +1,16 @@
 {{#each discussions as |discussion|}}
   {{log discussion}}
 
-  {{#if discussion.editable}}
     <tr data-id="{{discussion.id}}" class="table-primary">
-      <td><button class="update-topic" data-toggle="modal" data-target="#udpateTopicModal" data-id="{{discussion.id}}" type="button">Modify</button></td>
+      {{#if discussion.editable}}
+        <td><button class="update-topic" data-toggle="modal" data-target="#udpateTopicModal" data-id="{{discussion.id}}" type="button">Modify</button></td>
+      {{else}}
+        <td></td>
+      {{/if}}
       <td>{{discussion.title}}</td>
+      <td>{{discussion.users.length}} Total Votes</td>
+      <td><button class="upvote" data-id="{{discussion.id}}" type="button">Upvote</button></td>
+      <td><button class="downvote" data-id="{{discussion.id}}" type="button">Downvote</button></td>
     </tr>
-  {{else}}
-    <tr data-id="{{discussion.id}}" class="table-secondary">
-      <td></td>
-      <td>{{discussion.title}}</td>
-    </tr>
-  {{/if}}
 
 {{/each}}

@@ -2,10 +2,12 @@
 // require dependencies
 const ui = require('../ui')
 const showDiscussionsTemplate = require('../templates/discussions-listing.handlebars')
+const showDiscussionsLoggedOutTemplate = require('../templates/discussions-listing-logged-out.handlebars')
 const updateFormTemplate = require('../templates/update-topic-form.handlebars')
-// const store = require('../store')
+const store = require('../store')
 
 const getDiscussionsSuccess = function (response) {
+  store.discussions = response.discussions
   // if you were redirected to getDiscussionsSuccess from createDiscussion,
   // hide the open modal you used to submit the proposal
   $('#proposeTopicModal').modal('hide')
@@ -16,11 +18,20 @@ const getDiscussionsSuccess = function (response) {
   $('#propose-topic-form > input').val('')
   console.log('response.discussions from getDiscussionSuccess is: ', response.discussions)
   console.log(`data from getDiscussionsSuccess is ${response}`)
-  if (response.discussions.length === 0) {
-    $('.discussion-list').html('No sessions to display. Have a topic to propose?')
+  if (store.user) {
+    if (response.discussions.length === 0) {
+      $('.discussion-list').html('No sessions to display. Have a topic to propose?')
+    } else {
+      const showDiscussionsHtml = showDiscussionsTemplate({ discussions: response.discussions })
+      $('.discussion-list').html(showDiscussionsHtml)
+    }
   } else {
-    const showDiscussionsHtml = showDiscussionsTemplate({ discussions: response.discussions })
-    $('.discussion-list').html(showDiscussionsHtml)
+    if (response.discussions.length === 0) {
+      $('.discussion-list').html('No sessions to display. Have a topic to propose? Log in!')
+    } else {
+      const showDiscussionsHtml = showDiscussionsLoggedOutTemplate({ discussions: response.discussions })
+      $('.discussion-list').html(showDiscussionsHtml)
+    }
   }
 }
 
