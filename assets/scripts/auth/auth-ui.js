@@ -17,6 +17,7 @@ const signInSuccess = function (response) {
   ui.clearMessage()
   // store data retricved from server
   store.user = response.user
+  console.log('store.user is: ', store.user)
   // change which auth options are available
   $('.sign-up').addClass('hidden')
   $('.sign-in').addClass('hidden')
