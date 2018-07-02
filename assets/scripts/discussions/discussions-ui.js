@@ -18,13 +18,21 @@ const getDiscussionsSuccess = function (response) {
   $('#propose-topic-form > input').val('')
   console.log('response.discussions from getDiscussionSuccess is: ', response.discussions)
   console.log(`data from getDiscussionsSuccess is ${response}`)
+  // if someone is logged in
   if (store.user) {
     if (response.discussions.length === 0) {
       $('.discussion-list').html('No sessions to display. Have a topic to propose?')
     } else {
-      const showDiscussionsHtml = showDiscussionsTemplate({ discussions: response.discussions })
+      console.log('store.user: ', store.user)
+      const discussions = response.discussions.map((discussion) => {
+        const userId = store.user.id
+        discussion.my_votes = discussion.vote_counts[userId]
+        return discussion
+      })
+      const showDiscussionsHtml = showDiscussionsTemplate({ discussions: discussions })
       $('.discussion-list').html(showDiscussionsHtml)
     }
+    //if no one is logged in
   } else {
     if (response.discussions.length === 0) {
       $('.discussion-list').html('No sessions to display. Have a topic to propose? Log in!')
