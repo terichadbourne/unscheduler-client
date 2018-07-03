@@ -18,6 +18,11 @@ const signInSuccess = function (response) {
   $('.voting-instructions, .proposing-instructions').removeClass('hidden')
   // store data retricved from server
   store.user = response.user
+  if (store.user.admin) {
+    $('.admin').removeClass('hidden')
+  } else {
+    $('.admin').addClass('hidden')
+  }
   console.log('store.user is: ', store.user)
   // change which auth options are available
   $('.sign-up').addClass('hidden')
@@ -65,6 +70,7 @@ const signOutSuccess = function (response) {
   $('.propose-topic').addClass('hidden')
   // remove user record and token from `store`
   delete store.user
+  $('.admin').addClass('hidden')
   // clear messages
   ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
   $('.voting-instructions, .proposing-instructions').addClass('hidden')

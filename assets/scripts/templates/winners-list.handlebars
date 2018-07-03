@@ -1,0 +1,23 @@
+<tr>
+  <th></th>
+  <th>Votes</th>
+  <th>Topic</th>
+ </tr>
+
+{{#each discussions as |discussion|}}
+  {{log discussion}}
+    {{#if discussion.tied}}
+      <tr data-id="{{discussion.id}}" class="tied table-primary">
+        <td>❓</td>
+        <td>{{discussion.votes.length}}</td>
+        <td>{{discussion.title}}</td>
+      </tr>
+    {{else}}
+      <tr data-id="{{discussion.id}}" class="table-primary">
+        <td>🏆</td>
+        <td>{{discussion.votes.length}}</td>
+        <td>{{discussion.title}}</td>
+      </tr>
+    {{/if}}
+
+{{/each}}

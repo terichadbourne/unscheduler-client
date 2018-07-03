@@ -73,6 +73,10 @@ input {
   margin: 5px auto;
 }
 
+main {
+  margin-bottom: 50px;
+}
+
 nav {
   background-color: $pure-black;
   color: $pure-white;
@@ -84,6 +88,14 @@ nav {
   max-width: 90%;
   margin: auto;
   border: 2px $pure-black solid;
+}
+
+.admin {
+  background-color: $pure-black;
+  color: $pure-white;
+  padding: 10px;
+  margin: 10px 20px;
+  border: thick $crimson-red solid;
 }
 
 .auth-alert-main,
@@ -117,11 +129,21 @@ nav {
   background-color: $crimson-red;
 }
 
+.winners-list tr {
+  background-color: white;
+  color: black;
+}
+
 #message {
   color: $pure-black;
   font-size: 18px;
   padding: 5px;
   text-align: center;
+}
+
+#pick-winners-form input {
+  color: black;
+  display: inline;
 }
 
 // override default

@@ -27,6 +27,29 @@
           <p class="auth-alert-main"></p>
           <p id="message">Sign in to add or update session ideas.</p>
 
+          <section class="admin hidden">
+            <h2>Top Secret Admin Stuff</h2>
+            <p>Congrats! You have top secret admin clearance!</p>
+            <h3>Pick Winners</h3>
+            <form id="pick-winners-form">
+              <label for="timeslots">Timeslots Available: </label>
+              <input type="number" name="timeslots" min="1" max="10" required>
+              <br>
+              <label for="rooms">Rooms Available: </label>
+              <input type="number" name="rooms" min="1" max="10" required>
+              <br>
+              <button class="btn btn-primary" type="submit" form="pick-winners-form">Calculate Winning Sessions</button>
+            </form>
+            <p class='winners-message'>
+              <!-- to be filled in by pickWinners function -->
+            </p>
+            <table class="table">
+              <tbody class="winners-list">
+                <!-- content to be added via Handlebars in pickWinners function -->
+              </tbody >
+            </table>
+          </section>
+
           <section class="discussions">
             <h2>Session Ideas</h2>
             <button class="list-discussions">Refresh List</button>

@@ -12,7 +12,13 @@ const deleteVoteError = function (error) {
   ui.showMessage('Error deleting vote from database.')
 }
 
+const pickWinnersError = function (error) {
+  console.log('in pickWinnerError')
+  ui.showMessage('Error retreiving votes from database to pick winners.')
+}
+
 module.exports = {
   createVoteError: createVoteError,
-  deleteVoteError: deleteVoteError
+  deleteVoteError: deleteVoteError,
+  pickWinnersError: pickWinnersError
 }

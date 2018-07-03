@@ -1,5 +1,7 @@
 'use strict'
 
+const showWinnersTemplate = require('../templates/winners-list.handlebars')
+const getFormFields = require('../../../lib/get-form-fields')
 const discussionsUi = require('../discussions/discussions-ui')
 const discussionsApi = require('../discussions/discussions-api')
 const votesUi = require('./votes-ui')
@@ -10,6 +12,7 @@ const store = require('../store')
 const addHandlers = function () {
   $('.discussion-list').on('click', '.upvote', onCreateVote)
   $('.discussion-list').on('click', '.downvote', onDeleteVote)
+  $('#pick-winners-form').on('submit', pickWinners)
 }
 
 const onDeleteVote = function (event) {
@@ -69,8 +72,62 @@ const onCreateVote = function (event) {
   }
 }
 
+const pickWinners = function (event) {
+  event.preventDefault()
+  console.log('in pickWinners')
+  const data = getFormFields(event.target)
+  console.log('data from form is: ', data)
+  const slots = data.timeslots * data.rooms
+  console.log('total slots available: ', slots)
+  discussionsApi.getDiscussions()
+    .then((response) => {
+      const discussions = response.discussions
+      console.log('discussions before sort: ', discussions)
+      // sort array so discussions with the most votes come first
+      discussions.sort((a, b) => { return b.votes.length - a.votes.length })
+      console.log('discussions after sort: ', discussions)
+      let proposedWinners = []
+      if (discussions.length <= slots) {
+        $('.winners-message').html(`You have ${slots} session slots to fill and
+          only ${discussions.length} proposals. Everyone wins!`)
+        proposedWinners = discussions
+      } else {
+        const minVotesToWin = discussions[slots - 1].votes.length
+        proposedWinners = discussions.filter((discussion) => discussion.votes.length >= minVotesToWin)
+        // if there's a tie, map to winners to add a tied boolean field to those
+        // with the least votes
+        if (proposedWinners.length !== slots) {
+          proposedWinners = discussions.filter((discussion) =>
+            discussion.votes.length >= minVotesToWin).map((discussion) => {
+              if (discussion.votes.length === minVotesToWin) {
+                discussion.tied = true
+              } else {
+                discussion.tied = false
+              }
+              return discussion
+            })
+          const tiedDiscussions = proposedWinners.filter((discussion) => discussion.votes.length === minVotesToWin).length
+          $('.winners-message').html(`Of the ${discussions.length} session ideas
+            proposed, there are ${proposedWinners.length} top contenders for
+            your ${slots} slots, with a tie for last place. Here they are,
+            including the ${tiedDiscussions} ideas trailing the pack at
+            ${minVotesToWin} votes each.`)
+        } else {
+          $('.winners-message').html(`Of the ${discussions.length} session ideas
+            proposed, the choice is clear! These are your attendees' top picks
+            for your ${slots} session slots.`)
+        }
+      }
+      console.log('proposed winners: ', proposedWinners)
+      const showWinnersHtml = showWinnersTemplate({ discussions: proposedWinners })
+      $('.winners-list').html(showWinnersHtml)
+    })
+    .catch(votesUi.pickWinnersError)
+}
+
 module.exports = {
   addHandlers: addHandlers,
   onDeleteVote: onDeleteVote,
-  onCreateVote: onCreateVote
+  onCreateVote: onCreateVote,
+  pickWinners: pickWinners
 }
