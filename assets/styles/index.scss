@@ -27,6 +27,18 @@ button.edit, button.remove {
 button.update-topic, button.upvote, button.downvote {
   font-size: 12px;
   margin: 5px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: green;
+  color: white;
+}
+
+button:disabled {
+  color: gray;
+  border-color: gray;
+  background-color: white;
 }
 
 nav button {
