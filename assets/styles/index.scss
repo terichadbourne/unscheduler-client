@@ -86,6 +86,14 @@ nav {
   border: 2px $pure-black solid;
 }
 
+.admin {
+  background-color: $pure-black;
+  color: $pure-white;
+  padding: 10px;
+  margin: 10px 20px;
+  border: thick $crimson-red solid;
+}
+
 .auth-alert-main,
 .auth-alert-modal {
   color: $pure-black;
