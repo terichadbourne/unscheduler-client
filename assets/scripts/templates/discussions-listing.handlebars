@@ -24,14 +24,14 @@
         <td>0</td>
       {{/if}}
       {{#if discussion.can_upvote}}
-        <td><button class="upvote" data-id="{{discussion.id}}" type="button">Upvote</button></td>
+        <td><button class="upvote" data-id="{{discussion.id}}" type="button">Add Vote</button></td>
       {{else}}
-        <td><button class="upvote" data-id="{{discussion.id}}" type="button" disabled>Upvote</button></td>
+        <td><button class="upvote" data-id="{{discussion.id}}" type="button" disabled>Add Vote</button></td>
       {{/if}}
       {{#if discussion.can_downvote}}
-          <td><button class="downvote" data-id="{{discussion.id}}" type="button">Downvote</button></td>
+          <td><button class="downvote" data-id="{{discussion.id}}" type="button">Remove Vote</button></td>
       {{else}}
-          <td><button class="downvote" data-id="{{discussion.id}}" type="button" disabled>Downvote</button></td>
+          <td><button class="downvote" data-id="{{discussion.id}}" type="button" disabled>Remove Vote</button></td>
       {{/if}}
 
     </tr>

@@ -20,8 +20,9 @@ button {
   margin: 10px auto;
 }
 
-button.edit, button.remove {
-  color: $pure-white;
+button.edit, button.remove, .modal-footer button {
+  color: $pure-black;
+  border: thin $pure-black solid;
 }
 
 button.update-topic, button.upvote, button.downvote {
@@ -30,15 +31,16 @@ button.update-topic, button.upvote, button.downvote {
   font-weight: bold;
 }
 
-button:hover {
-  background-color: green;
-  color: white;
+button:hover,
+.btn:hover {
+  background-color: $sea-green;
+  color: $pure-white;
 }
 
 button:disabled {
-  color: gray;
-  border-color: gray;
-  background-color: white;
+  color: $gainsboro-gray;
+  border-color: $gainsboro-gray;
+  background-color: $pure-white;
 }
 
 nav button {
@@ -81,7 +83,7 @@ nav {
   text-align: left;
   max-width: 90%;
   margin: auto;
-  border: 2px black solid;
+  border: 2px $pure-black solid;
 }
 
 .auth-alert-main,
@@ -99,8 +101,8 @@ nav {
   display: inline;
 }
 
-.edit {
-  background-color: green;
+.edit:hover {
+  background-color: $sea-green;
 }
 
 .hidden {
@@ -111,8 +113,8 @@ nav {
   margin-bottom: 0;
 }
 
-.remove {
-  background-color: red;
+.remove:hover {
+  background-color: $crimson-red;
 }
 
 #message {
