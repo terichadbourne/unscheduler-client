@@ -132,6 +132,11 @@ nav {
   text-align: center;
 }
 
+#pick-winners-form input {
+  color: black;
+  display: inline;
+}
+
 // override default
 @media (min-width: 768px) {
   .navbar {
