@@ -15,6 +15,7 @@ const signUpError = function (error) {
 const signInSuccess = function (response) {
   // if there was a message about needing to sign in, remove it
   ui.clearMessage()
+  $('.voting-instructions, .proposing-instructions').removeClass('hidden')
   // store data retricved from server
   store.user = response.user
   console.log('store.user is: ', store.user)
@@ -66,6 +67,7 @@ const signOutSuccess = function (response) {
   delete store.user
   // clear messages
   ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
+  $('.voting-instructions, .proposing-instructions').addClass('hidden')
   // change which auth options are available
   $('.sign-up').removeClass('hidden')
   $('.sign-in').removeClass('hidden')
