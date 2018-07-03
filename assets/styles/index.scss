@@ -73,6 +73,10 @@ input {
   margin: 5px auto;
 }
 
+main {
+  margin-bottom: 50px;
+}
+
 nav {
   background-color: $pure-black;
   color: $pure-white;
@@ -123,6 +127,11 @@ nav {
 
 .remove:hover {
   background-color: $crimson-red;
+}
+
+.winners-list tr {
+  background-color: white;
+  color: black;
 }
 
 #message {

@@ -1,5 +1,6 @@
 'use strict'
 
+const showWinnersTemplate = require('../templates/winners-list.handlebars')
 const getFormFields = require('../../../lib/get-form-fields')
 const discussionsUi = require('../discussions/discussions-ui')
 const discussionsApi = require('../discussions/discussions-api')
@@ -118,6 +119,8 @@ const pickWinners = function (event) {
         }
       }
       console.log('proposed winners: ', proposedWinners)
+      const showWinnersHtml = showWinnersTemplate({ discussions: proposedWinners })
+      $('.winners-list').html(showWinnersHtml)
     })
     .catch(votesUi.pickWinnersError)
 }
