@@ -1,3 +1,12 @@
+<tr>
+   <th></th>
+   <th>Session Topic</th>
+   <th>Total Votes</th>
+   <th>Your Votes</th>
+   <th></th>
+   <th></th>
+ </tr>
+
 {{#each discussions as |discussion|}}
   {{log discussion}}
 
@@ -8,9 +17,23 @@
         <td></td>
       {{/if}}
       <td>{{discussion.title}}</td>
-      <td>{{discussion.users.length}} Total Votes</td>
-      <td><button class="upvote" data-id="{{discussion.id}}" type="button">Upvote</button></td>
-      <td><button class="downvote" data-id="{{discussion.id}}" type="button">Downvote</button></td>
+      <td>{{discussion.users.length}}</td>
+      {{#if discussion.current_user_session_votes}}
+        <td>{{discussion.current_user_session_votes}}</td>
+      {{else}}
+        <td>0</td>
+      {{/if}}
+      {{#if discussion.can_upvote}}
+        <td><button class="upvote" data-id="{{discussion.id}}" type="button">Upvote</button></td>
+      {{else}}
+        <td><button class="upvote" data-id="{{discussion.id}}" type="button" disabled>Upvote</button></td>
+      {{/if}}
+      {{#if discussion.can_downvote}}
+          <td><button class="downvote" data-id="{{discussion.id}}" type="button">Downvote</button></td>
+      {{else}}
+          <td><button class="downvote" data-id="{{discussion.id}}" type="button" disabled>Downvote</button></td>
+      {{/if}}
+
     </tr>
 
 {{/each}}
