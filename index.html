@@ -21,6 +21,8 @@
             <button class="change-password hidden btn btn-outline-success" data-toggle="modal" data-target="#changePasswordModal" type="button">Change Password</button>
             <button class="sign-in btn btn-outline-success" data-toggle="modal" data-target="#signInModal" type="button">Sign In</button>
             <button class="sign-up btn btn-outline-success" data-toggle="modal" data-target="#signUpModal" type="button">Sign Up</button>
+            <button class="show-admin hidden btn btn-outline-success" type="button">Admin Settings</button>
+            <button class="hide-admin hidden btn btn-outline-success" type="button">Hide Settings</button>
           </form>
         </nav>
 
@@ -29,7 +31,8 @@
           <p id="message">Sign in to add or update session ideas.</p>
 
           <!-- admin panel shown to admins only -->
-          <section class="admin hidden">
+          <section class="admin admin-panel hidden">
+
             <h3>Top Secret Admin Stuff</h3>
             <p>Congrats! You have top secret admin clearance!</p>
             <h4>Pick Winners</h4>
@@ -109,9 +112,9 @@
           <!-- shown to logged in user when voting is open -->
           <section class="discussions stage-dependent voting login-req hidden">
             <h3>Vote for Discussion Topics</h3>
-            <p>
-              You have a maximum of <span id="max-votes">3</span> votes to cast.
-              You can spread them around or apply multiple votes to a single
+            <p>You have a maximum of <strong><span id="max-votes">5</span>
+               votes</strong> to cast. You can spread them
+               around or apply multiple votes to a single
                session. To change a vote, remove it from one session
               and add it to another. Session ideas can't be modified during
               the voting period.</p>

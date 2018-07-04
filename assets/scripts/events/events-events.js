@@ -10,6 +10,14 @@ const config = require('../config')
 const addHandlers = function () {
   // $('#update-event-form').on('submit', onUpdateEvent)
   $('button.stage').on('click', onUpdateStage)
+  $('.show-admin').on('click', () => {
+    $('.admin-panel, .hide-admin').removeClass('hidden')
+    $('.show-admin').addClass('hidden')
+  })
+  $('.hide-admin').on('click', () => {
+    $('.admin-panel, .hide-admin').addClass('hidden')
+    $('.show-admin').removeClass('hidden')
+  })
 }
 
 const onGetEvent = function () {

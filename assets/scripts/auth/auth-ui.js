@@ -22,9 +22,10 @@ const signInSuccess = function (response) {
   // store data retricved from server
   store.user = response.user
   if (store.user.admin) {
-    $('.admin').removeClass('hidden')
+    $('.show-admin').removeClass('hidden')
+    $('.admin-panel, .hide-admin').addClass('hidden')
   } else {
-    $('.admin').addClass('hidden')
+    $('.admin-panel, .hide-admin, .show-admin').addClass('hidden')
   }
   console.log('store.user is: ', store.user)
   // change which auth options are available
@@ -73,7 +74,7 @@ const signOutSuccess = function (response) {
   // remove user record and token from `store`
   delete store.user
   delete store.event
-  $('.admin').addClass('hidden')
+  $('.admin-panel, .show-admin, .hide-admin').addClass('hidden')
   $('.login-req').addClass('hidden')
   $('.logout-req').removeClass('hidden')
   // clear messages
