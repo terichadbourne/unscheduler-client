@@ -50,21 +50,40 @@
             </table>
           </section>
 
-          <section class="discussions">
-            <h2>Session Ideas</h2>
-            <button class="list-discussions">Refresh List</button>
-            <button class="propose-topic hidden" data-toggle="modal"
+          <h2 id="event-name"></h2>
+          <section class="event-stage login-req hidden">
+            <span class="stage proposing">Proposals Open</span>
+            <span class="stage voting">Voting Open</span>
+            <span class="stage final">Schedule Finalized</span>
+          </section>
+          <section class="discussions stage-dependent proposing voting">
+            <h3>Session Ideas</h3>
+            <button class="list-discussions stage-dependent proposing voting">Refresh List</button>
+            <button class="propose-topic stage-dependent proposing login-req hidden" data-toggle="modal"
               data-target="#proposeTopicModal" type="button">Propose a Topic</button>
-            <p class="proposing-instructions hidden"><strong>Proposing a Topic:
-              </strong>You can propose an unlimited number of session topics.
-              Click the "modify" button to edit or delete an idea you've proposed.
-              Once voting begins, you won't be able to edit your proposals.</p>
-            <p class="voting-instructions hidden"><strong>Voting: </strong>You
-              have a maximum of 5 votes to cast. To change a vote, remove it
+            <p class="stage-dependent proposing instructions login-req hidden">
+              You can propose an unlimited number of session topics. Click the
+              "Modify" button to edit or delete an idea you've proposed. Once
+              voting begins, you won't be able to edit your proposals.</p>
+            <p class="stage-dependent voting instructions login-req hidden">You have a
+              maximum of <span id="max-votes">3</span> votes to cast. You can spread them around or apply
+              multiple votes to a single session. To change a vote, remove it
               from one session and add it to another. Session ideas can't be
               modified during the voting period.</p>
+            <p class="logout-req">Log in to propose an idea or vote on sessions.</p>
+            <div class="discussion-list-message"></div>
+            <table class="table table-striped stage-dependent proposing login-req">
+              <tbody class="discussion-list-proposing">
+                <!-- content to be added via Handlebars -->
+              </tbody >
+            </table>
+            <table class="table table-striped stage-dependent voting login-req">
+              <tbody class="discussion-list-voting">
+                <!-- content to be added via Handlebars -->
+              </tbody >
+            </table>
             <table class="table table-striped">
-              <tbody class="discussion-list">
+              <tbody class="discussion-list-logged-out logout-req">
                 <!-- content to be added via Handlebars -->
               </tbody >
             </table>
