@@ -13,6 +13,7 @@
     </head>
       <body class="container-fluid">
 
+        <!-- nav bar with user auth options -->
         <nav class="navbar navbar-light bg-light">
           <span class="navbar-brand">Unscheduler</span>
           <form class="form-inline justify-content-end">
@@ -20,6 +21,8 @@
             <button class="change-password hidden btn btn-outline-success" data-toggle="modal" data-target="#changePasswordModal" type="button">Change Password</button>
             <button class="sign-in btn btn-outline-success" data-toggle="modal" data-target="#signInModal" type="button">Sign In</button>
             <button class="sign-up btn btn-outline-success" data-toggle="modal" data-target="#signUpModal" type="button">Sign Up</button>
+            <button class="show-admin hidden btn btn-outline-success" type="button">Admin Settings</button>
+            <button class="hide-admin hidden btn btn-outline-success" type="button">Hide Settings</button>
           </form>
         </nav>
 
@@ -27,10 +30,12 @@
           <p class="auth-alert-main"></p>
           <p id="message">Sign in to add or update session ideas.</p>
 
-          <section class="admin hidden">
-            <h2>Top Secret Admin Stuff</h2>
+          <!-- admin panel shown to admins only -->
+          <section class="admin admin-panel hidden">
+
+            <h3>Top Secret Admin Stuff</h3>
             <p>Congrats! You have top secret admin clearance!</p>
-            <h3>Pick Winners</h3>
+            <h4>Pick Winners</h4>
             <form id="pick-winners-form">
               <label for="timeslots">Timeslots Available: </label>
               <input type="number" name="timeslots" min="1" max="10" required>
@@ -48,26 +53,87 @@
                 <!-- content to be added via Handlebars in pickWinners function -->
               </tbody >
             </table>
+            <h4>Update Event Details</h4>
+            <section class="event-stage">
+              <p>Click to update the stage you're at in the voting process.</p>
+              <div class="event-stage">
+                <button class="stage proposing" data-id="proposals_open">Proposals Open</button>
+                <button class="stage voting" data-id="voting_open">Voting Open</button>
+                <button class="stage final" data-id="schedule_finalized">Schedule Finalized</button>
+              </div>
+            </section>
+            <form id="update-event-name-form">
+              <label for="timeslots">Event name: </label>
+              <input type="text" name="name" required>
+              <button class="btn btn-primary" type="submit" form="update-event-name-form">Update Event Name</button>
+            </form>
+            <form id="update-max-votes-form">
+              <label for="max_votes">Votes allowed per attendee: </label>
+              <input type="number" name="max_votes" min="1" max="10" required><br>
+              <button class="btn btn-primary" type="submit" form="update-max-votes-form">Update Max Votes</button>
+            </form>
           </section>
 
-          <section class="discussions">
-            <h2>Session Ideas</h2>
-            <button class="list-discussions">Refresh List</button>
-            <button class="propose-topic hidden" data-toggle="modal"
-              data-target="#proposeTopicModal" type="button">Propose a Topic</button>
-            <p class="proposing-instructions hidden"><strong>Proposing a Topic:
-              </strong>You can propose an unlimited number of session topics.
-              Click the "modify" button to edit or delete an idea you've proposed.
-              Once voting begins, you won't be able to edit your proposals.</p>
-            <p class="voting-instructions hidden"><strong>Voting: </strong>You
-              have a maximum of 5 votes to cast. To change a vote, remove it
-              from one session and add it to another. Session ideas can't be
-              modified during the voting period.</p>
+          <!-- event stage indicator for logged in users -->
+          <h2 id="event-name"></h2>
+          <section class="event-stage login-req hidden">
+            <span class="stage proposing">Proposals Open</span>
+            <span class="stage voting">Voting Open</span>
+            <span class="stage final">Schedule Finalized</span>
+          </section>
+
+          <!-- shown to users who aren't logged in-->
+          <section class="logout-req">
+            <h3>Session Ideas</h3>
+            <p>Log in to propose an idea or vote on sessions.</p>
             <table class="table table-striped">
-              <tbody class="discussion-list">
-                <!-- content to be added via Handlebars -->
-              </tbody >
+              <tbody class="discussion-list-logged-out">
+              </tbody>
             </table>
+          </section>
+
+          <!-- shown to logged in user when propsoals are open -->
+          <section class="discussions stage-dependent proposing login-req hidden">
+            <h3>Propose a Session Idea</h3>
+            <p> You can propose an unlimited number of session topics. Click the
+              "Modify" button to edit or delete an idea you've proposed. Once
+              voting begins, you won't be able to edit your proposals.</p>
+            <button class="list-discussions">Refresh List</button>
+            <button class="propose-topic" data-toggle="modal"
+              data-target="#proposeTopicModal" type="button">Propose a Topic</button>
+            <div class="discussion-list-message"></div>
+            <table class="table table-striped">
+              <tbody class="discussion-list-proposing">
+                <!-- content to be added via Handlebars -->
+              </tbody>
+            </table>
+          </section>
+
+          <!-- shown to logged in user when voting is open -->
+          <section class="discussions stage-dependent voting login-req hidden">
+            <h3>Vote for Discussion Topics</h3>
+            <p>You have a maximum of <strong><span id="max-votes">5</span>
+               votes</strong> to cast. You can spread them
+               around or apply multiple votes to a single
+               session. To change a vote, remove it from one session
+              and add it to another. Session ideas can't be modified during
+              the voting period.</p>
+            <button class="list-discussions">Refresh List</button>
+            <div class="discussion-list-message"></div>
+            <table class="table table-striped">
+              <tbody class="discussion-list-voting">
+                <!-- content to be added via Handlebars -->
+              </tbody>
+            </table>
+          </section>
+
+          <!-- shown to logged in user when schedule is finalized -->
+          <section class="discussions stage-dependent final login-req hidden">
+            <h3>Final Schedule</h3>
+            <p>Voting has ended and your awesome event organizers have scheduled
+              the everyone's favorite topics for discussion.</p>
+            <p>Schedules can't be displayed online quite yet,
+            so please check the hard copy schedule at the venue.</p>
           </section>
 
         </main>

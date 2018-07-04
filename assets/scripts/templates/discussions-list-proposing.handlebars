@@ -1,0 +1,18 @@
+<tr>
+   <th></th>
+   <th>Session Topic</th>
+ </tr>
+
+{{#each discussions as |discussion|}}
+  {{log discussion}}
+
+    <tr data-id="{{discussion.id}}" class="table-primary">
+      {{#if discussion.editable}}
+        <td><button class="update-topic" data-toggle="modal" data-target="#udpateTopicModal" data-id="{{discussion.id}}" type="button">Modify</button></td>
+      {{else}}
+        <td></td>
+      {{/if}}
+      <td>{{discussion.title}}</td>
+    </tr>
+
+{{/each}}

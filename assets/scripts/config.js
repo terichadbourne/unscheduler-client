@@ -12,6 +12,14 @@ if (window.location.hostname === 'localhost') {
   apiUrl = apiUrls.production
 }
 
+let eventId
+if (window.location.hostname === 'localhost') {
+  eventId = 1
+} else {
+  eventId = 1
+}
+
 module.exports = {
-  apiUrl
+  apiUrl,
+  eventId
 }

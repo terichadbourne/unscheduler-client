@@ -10,8 +10,8 @@ const store = require('../store')
 
 // event handlers for...
 const addHandlers = function () {
-  $('.discussion-list').on('click', '.upvote', onCreateVote)
-  $('.discussion-list').on('click', '.downvote', onDeleteVote)
+  $('.discussion-list-voting').on('click', '.upvote', onCreateVote)
+  $('.discussion-list-voting').on('click', '.downvote', onDeleteVote)
   $('#pick-winners-form').on('submit', pickWinners)
 }
 

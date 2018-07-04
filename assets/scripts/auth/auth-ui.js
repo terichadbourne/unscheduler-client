@@ -3,6 +3,7 @@
 const ui = require('../ui')
 const store = require('../store')
 const discussionsEvents = require('../discussions/discussions-events')
+const eventsEvents = require('../events/events-events')
 
 // run on sign up error
 const signUpError = function (error) {
@@ -14,14 +15,17 @@ const signUpError = function (error) {
 // (also run after successful sign-up leads to automatic sign-in, if successful)
 const signInSuccess = function (response) {
   // if there was a message about needing to sign in, remove it
+  eventsEvents.onGetEvent()
   ui.clearMessage()
-  $('.voting-instructions, .proposing-instructions').removeClass('hidden')
+  $('.login-req').removeClass('hidden')
+  $('.logout-req').addClass('hidden')
   // store data retricved from server
   store.user = response.user
   if (store.user.admin) {
-    $('.admin').removeClass('hidden')
+    $('.show-admin').removeClass('hidden')
+    $('.admin-panel, .hide-admin').addClass('hidden')
   } else {
-    $('.admin').addClass('hidden')
+    $('.admin-panel, .hide-admin, .show-admin').addClass('hidden')
   }
   console.log('store.user is: ', store.user)
   // change which auth options are available
@@ -38,7 +42,6 @@ const signInSuccess = function (response) {
   $('#signUpModal').modal('hide')
   // refresh list of discussions to get accurate editable values
   discussionsEvents.onGetDiscussions()
-  $('.propose-topic').removeClass('hidden')
 }
 
 // run on sign-in error
@@ -70,7 +73,10 @@ const signOutSuccess = function (response) {
   $('.propose-topic').addClass('hidden')
   // remove user record and token from `store`
   delete store.user
-  $('.admin').addClass('hidden')
+  delete store.event
+  $('.admin-panel, .show-admin, .hide-admin').addClass('hidden')
+  $('.login-req').addClass('hidden')
+  $('.logout-req').removeClass('hidden')
   // clear messages
   ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
   $('.voting-instructions, .proposing-instructions').addClass('hidden')
