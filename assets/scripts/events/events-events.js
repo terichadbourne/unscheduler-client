@@ -29,9 +29,9 @@ const setDefaultData = function () {
   data.event = {
     name: store.event.name,
     max_votes: store.event.max_votes,
-    proposals_open: false,
-    voting_open: false,
-    schedule_finalized: false,
+    proposals_open: store.event.proposals_open,
+    voting_open: store.event.voting_open,
+    schedule_finalized: store.event.schedule_finalized,
     user_id: store.event.user
   }
   console.log('data is: ', data)
@@ -39,10 +39,16 @@ const setDefaultData = function () {
 }
 
 const onUpdateStage = function (event) {
+  // grab previous data
   const data = setDefaultData()
   console.log('in onChangeStage and data is: ', data)
   const newStage = $(event.target).data('id')
   console.log('new stage is: ', newStage)
+  // set all stages to false
+  data.event.proposals_open = false
+  data.event.voting_open = false
+  data.event.schedule_finalized = false
+  // then set the selected stage to true
   data.event[newStage] = true
   console.log('revised data with new stage: ', data)
   eventsApi.updateEvent(data)
