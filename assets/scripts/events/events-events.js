@@ -12,9 +12,9 @@ const addHandlers = function () {
   $('button.stage').on('click', onUpdateStage)
 }
 
-const onGetEvent = function (event) {
+const onGetEvent = function () {
   console.log('in onGetEvent')
-  // make API call for event 1, which is the default (and only) event
+  // make API call for the default (and only) event, whose id is stored in config
   eventsApi.getEvent(config.eventId)
     .then(eventsUi.getEventSuccess)
     .catch(eventsUi.getEventError)

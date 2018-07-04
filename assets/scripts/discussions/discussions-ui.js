@@ -6,9 +6,12 @@ const showDiscussionsVotingTemplate = require('../templates/discussions-list-vot
 const showDiscussionsLoggedOutTemplate = require('../templates/discussions-list-logged-out.handlebars')
 const updateFormTemplate = require('../templates/update-topic-form.handlebars')
 const store = require('../store')
+const eventsEvents = require('../events/events-events')
 
 const getDiscussionsSuccess = function (response) {
   store.discussions = response.discussions
+  // fetch updated event record in case it's changed
+  eventsEvents.onGetEvent()
   // if you were redirected to getDiscussionsSuccess from createDiscussion,
   // hide the open modal you used to submit the proposal
   $('#proposeTopicModal').modal('hide')
