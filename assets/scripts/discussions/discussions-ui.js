@@ -21,11 +21,18 @@ const getDiscussionsSuccess = function (response) {
   console.log(`data from getDiscussionsSuccess is ${response}`)
   // if someone is logged in
   if (store.user) {
+    const revisedDiscussions = response.discussions.map((discussion) => {
+      if (store.event.max_votes) {
+        discussion.can_upvote = discussion.current_user_total_votes < store.event.max_votes
+      }
+      return discussion
+    })
+    console.log('revisedDiscussions after updating max_votes is: ', revisedDiscussions)
     if (response.discussions.length === 0) {
       $('.discussion-list-message').html('No sessions to display. Have a topic to propose?')
     } else {
-      const showDiscussionsVotingHtml = showDiscussionsVotingTemplate({ discussions: response.discussions })
-      const showDiscussionsProposingHtml = showDiscussionsProposingTemplate({ discussions: response.discussions })
+      const showDiscussionsVotingHtml = showDiscussionsVotingTemplate({ discussions: revisedDiscussions })
+      const showDiscussionsProposingHtml = showDiscussionsProposingTemplate({ discussions: revisedDiscussions })
       $('.discussion-list-voting').html(showDiscussionsVotingHtml)
       $('.discussion-list-proposing').html(showDiscussionsProposingHtml)
     }
