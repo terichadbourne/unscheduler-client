@@ -129,6 +129,22 @@ nav {
   background-color: $crimson-red;
 }
 
+section.event-stage span.stage {
+  margin: 10px;
+  font-size: 16px;
+  font-weight: normal;
+  background-color: $gainsboro-gray;
+  color: $dim-gray;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: normal;
+}
+
+section.event-stage span.stage.highlight {
+  background-color: $sea-green;
+  color: $pure-white;
+}
+
 .winners-list tr {
   background-color: white;
   color: black;
