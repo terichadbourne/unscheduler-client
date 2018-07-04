@@ -9,7 +9,7 @@ const addHandlers = function () {
   // auth-related buttons
   $('.list-discussions').on('click', onGetDiscussions)
   $('#propose-topic-form').on('submit', onCreateDiscussion)
-  $('.discussion-list').on('click', '.update-topic', onGetDiscussion)
+  $('.discussion-list-proposing').on('click', '.update-topic', onGetDiscussion)
   $('#update-topic-form').on('submit', onUpdateDiscussion)
   $('.remove').on('click', onDeleteDiscussion)
 }
