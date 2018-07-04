@@ -30,21 +30,23 @@ const getEventError = function (error) {
   ui.showMessage('Error getting event details from database.')
 }
 
-// const updateEventError = function (error) {
-//   console.log('in updateEventError')
-//   ui.showMessage('Error updating event details in database.')
-// }
-//
-// const updateEventSuccess = function (response) {
-//   console.log('in updateEventSuccess')
-//   console.log('response: ', response)
-//   ui.showMessage(`Success UPDATING event details from database.`)
-// }
+const updateEventError = function (error) {
+  console.log('in updateEventError')
+  ui.showMessage('Error updating event details in database.')
+}
+
+const updateEventSuccess = function (response) {
+  console.log('in updateEventSuccess')
+  console.log('response: ', response)
+  ui.showMessage(`Success UPDATING event details from database.`)
+  store.event = response.event
+  updateStage(response.event.stage)
+}
 
 module.exports = {
-  // updateEventError: updateEventError,
+  updateEventError: updateEventError,
   getEventError: getEventError,
-  // updateEventSuccess: updateEventSuccess,
+  updateEventSuccess: updateEventSuccess,
   getEventSuccess: getEventSuccess,
   updateStage: updateStage
 }

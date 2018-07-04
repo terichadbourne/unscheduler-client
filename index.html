@@ -48,6 +48,27 @@
                 <!-- content to be added via Handlebars in pickWinners function -->
               </tbody >
             </table>
+            <h3>Update Event Details</h3>
+            <section class="event-stage">
+              <p>Click to update the stage you're at in the voting process.</p>
+              <div class="event-stage">
+                <button class="stage proposing" data-id="proposals_open">Proposals Open</button>
+                <button class="stage voting" data-id="voting_open">Voting Open</button>
+                <button class="stage final" data-id="schedule_finalized">Schedule Finalized</button>
+              </div>
+            </section>
+            <!-- <form id="update-event-form">
+              <label for="timeslots">Event Name: </label>
+              <input type="text" name="name" required>
+              <br>
+              <label for="max_votes">Max Votes: </label>
+              <input type="number" name="max_votes" min="1" max="10" required><br>
+              <label for="stage">Stage: </label><br>
+              <input type="radio" name="stage" value="proposals_open">  Proposals Open<br>
+              <input type="radio" name="stage" value="voting_open">  Voting Open<br>
+              <input type="radio" name="stage" value="schedule_finalized">  Schedule Finalized<br>
+              <button class="btn btn-primary" type="submit" form="update-event-form">Update</button>
+            </form> -->
           </section>
 
           <h2 id="event-name"></h2>

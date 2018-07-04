@@ -129,7 +129,8 @@ nav {
   background-color: $crimson-red;
 }
 
-section.event-stage span.stage {
+section.event-stage span.stage,
+button.stage {
   margin: 10px;
   font-size: 16px;
   font-weight: normal;
@@ -138,9 +139,22 @@ section.event-stage span.stage {
   padding: 8px;
   border-radius: 4px;
   font-weight: normal;
+  display: inline;
 }
 
-section.event-stage span.stage.highlight {
+div.event-stage {
+  margin: 20px auto;
+}
+
+div.event-stage span.stage:hover,
+button.stage:hover {
+  background-color: $sea-green;
+  color: $pure-white;
+  border: 3px $pure-white solid;
+}
+
+section.event-stage span.stage.highlight,
+button.stage.highlight {
   background-color: $sea-green;
   color: $pure-white;
 }
@@ -158,6 +172,11 @@ section.event-stage span.stage.highlight {
 }
 
 #pick-winners-form input {
+  color: black;
+  display: inline;
+}
+
+#update-event-form input {
   color: black;
   display: inline;
 }
