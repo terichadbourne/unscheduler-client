@@ -8,7 +8,7 @@ const store = require('../store')
 const updateEvent = function (data) {
   return $.ajax({
     method: 'PATCH',
-    url: config.apiUrl + `/discussions/${data.discussion.id}`,
+    url: config.apiUrl + `/events/${config.eventId}`,
     data: data,
     headers: {
       Authorization: 'Token token=' + store.user.token
