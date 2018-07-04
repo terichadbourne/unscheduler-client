@@ -17,6 +17,12 @@ const updateStage = function (stage) {
   console.log('in updateStage')
   ui.showMessage(`Success GETTING event details from database. Event status is
     ${stage}`)
+  $('#max-votes').html(store.event.max_votes)
+  $('#event-name').html(store.event.name)
+  $('.stage-dependent').addClass('hidden')
+  $(`.${stage}`).removeClass('hidden')
+  $(`.event-stage .stage`).removeClass('highlight')
+  $(`.event-stage .${stage}`).addClass('highlight')
 }
 
 const getEventError = function (error) {
