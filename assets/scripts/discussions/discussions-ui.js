@@ -1,8 +1,9 @@
 'use strict'
 // require dependencies
 const ui = require('../ui')
-const showDiscussionsTemplate = require('../templates/discussions-listing.handlebars')
-const showDiscussionsLoggedOutTemplate = require('../templates/discussions-listing-logged-out.handlebars')
+const showDiscussionsProposingTemplate = require('../templates/discussions-list-proposing.handlebars')
+const showDiscussionsVotingTemplate = require('../templates/discussions-list-voting.handlebars')
+const showDiscussionsLoggedOutTemplate = require('../templates/discussions-list-logged-out.handlebars')
 const updateFormTemplate = require('../templates/update-topic-form.handlebars')
 const store = require('../store')
 
@@ -21,18 +22,20 @@ const getDiscussionsSuccess = function (response) {
   // if someone is logged in
   if (store.user) {
     if (response.discussions.length === 0) {
-      $('.discussion-list').html('No sessions to display. Have a topic to propose?')
+      $('.discussion-list-message').html('No sessions to display. Have a topic to propose?')
     } else {
-      const showDiscussionsHtml = showDiscussionsTemplate({ discussions: response.discussions })
-      $('.discussion-list').html(showDiscussionsHtml)
+      const showDiscussionsVotingHtml = showDiscussionsVotingTemplate({ discussions: response.discussions })
+      const showDiscussionsProposingHtml = showDiscussionsProposingTemplate({ discussions: response.discussions })
+      $('.discussion-list-voting').html(showDiscussionsVotingHtml)
+      $('.discussion-list-proposing').html(showDiscussionsProposingHtml)
     }
-    //if no one is logged in
+    // if no one is logged in
   } else {
     if (response.discussions.length === 0) {
-      $('.discussion-list').html('No sessions to display. Have a topic to propose? Log in!')
+      $('.discussion-list-logged-out').html('No sessions to display. Have a topic to propose? Log in!')
     } else {
-      const showDiscussionsHtml = showDiscussionsLoggedOutTemplate({ discussions: response.discussions })
-      $('.discussion-list').html(showDiscussionsHtml)
+      const showDiscussionsLoggedOutHtml = showDiscussionsLoggedOutTemplate({ discussions: response.discussions })
+      $('.discussion-list-logged-out').html(showDiscussionsLoggedOutHtml)
     }
   }
 }
