@@ -3,6 +3,7 @@
 const ui = require('../ui')
 const store = require('../store')
 const discussionsEvents = require('../discussions/discussions-events')
+const eventsEvents = require('../events/events-events')
 
 // run on sign up error
 const signUpError = function (error) {
@@ -14,6 +15,7 @@ const signUpError = function (error) {
 // (also run after successful sign-up leads to automatic sign-in, if successful)
 const signInSuccess = function (response) {
   // if there was a message about needing to sign in, remove it
+  eventsEvents.onGetEvent()
   ui.clearMessage()
   $('.voting-instructions, .proposing-instructions').removeClass('hidden')
   // store data retricved from server
@@ -70,6 +72,7 @@ const signOutSuccess = function (response) {
   $('.propose-topic').addClass('hidden')
   // remove user record and token from `store`
   delete store.user
+  delete store.event
   $('.admin').addClass('hidden')
   // clear messages
   ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
