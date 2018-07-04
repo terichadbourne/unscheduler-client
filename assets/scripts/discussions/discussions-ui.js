@@ -11,7 +11,9 @@ const eventsEvents = require('../events/events-events')
 const getDiscussionsSuccess = function (response) {
   store.discussions = response.discussions
   // fetch updated event record in case it's changed
-  eventsEvents.onGetEvent()
+  if (store.user) {
+    eventsEvents.onGetEvent()
+  }
   // if you were redirected to getDiscussionsSuccess from createDiscussion,
   // hide the open modal you used to submit the proposal
   $('#proposeTopicModal').modal('hide')
