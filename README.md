@@ -1,23 +1,130 @@
-# Unscheduler API
+# Unscheduler: An unconference scheduling tool
 
-The Unscheduler is an app for managing schedules for unconferences, inspired by my work as a co-organizer for [Offline Camp](http://offlinefirst.org/camp).
+The Unscheduler is an app for managing the voting and scheduling process for
+unconferences, inspired by my work as a co-organizer for [Offline Camp](http://offlinefirst.org/camp). *(Yes, [unconferences have schedules]((https://medium.com/offline-camp/crafting-community-events-that-leave-them-wanting-smore-902974cff4d4)!)*
 
-It's built in two parts:
-* A front-end app, built with JavaScript, jQuery, HTML, and CSS
+Check out the code or the [live app](https://terichadbourne.github.io/unscheduler-client/)!
+
+* Front-end app
    * [GitHub repo](https://github.com/terichadbourne/unscheduler-client)
-   * [Live site](https://terichadbourne.github.io/unscheduler-client/), deployed on GitHub Pages
-* A back-end API, built with Ruby on Rails
+   * [Live site](https://terichadbourne.github.io/unscheduler-client/) (deployed on GitHub) Pages
+* Back-end API
    * [GitHub repo](https://github.com/terichadbourne/unscheduler-api)
-   * [Live site](https://unscheduler-api.herokuapp.com/), deployed on Heroku
+   * [Live site](https://unscheduler-api.herokuapp.com/) (deployed on Heroku)
 
-## Remaining Documentation Requirements
-* TODO Create 2 Github repos (one for your front-end and one for your back-end)
-* TODO Pin both repositories on GitHub as a Popular Repository
-* TODO Each repo will need a README.md file with a link to the other repo and an explanation of the what the app does and how it works.
-* TODO Each repo must contain the link to both deployed sites
-* TODO Complete the repository Description field and Website field with a meaningful sentence description of the application and link to the live URL github image
-* TODO List technologies used
-* TODO List unsolved problems which would be fixed in future iterations.
-* TODO Document your planning and tell a story about your development process and problem-solving strategy.
-* TODO Your front-end repo's README should also have: Link to wireframes and user stories.
-* TODO Your back-end repo's README should also have: Link to Entity Relationship Diagram (ERD).
+## Technologies used
+  - Front-end technologies
+    - JavaScript
+    - jQuery
+    - Handlebars
+    - Bootstrap
+    - HTML5
+    - CSS3
+    - Sass
+  - Back-end technologies
+    - Ruby on Rails
+    - PostgreSQL
+    - Active Record
+
+## The backstory: Unconference organizing with sticky notes and Mr. Sketch markers
+
+As a member of the [Offline First](http://offlinefirst.org) development
+community, I co-organize an unconference called [Offline Camp](http://offlinefirst.org/camp), where attendees propose topics for
+discussionand then vote to determine what topics are actually discussed in the
+limitedtime we have available. As organizers, we take the votes (a sticky note
+for each proposal, with stickers representing votes won) and give some careful
+thought to how to best schedule the winning sessions so that the most popular
+ones are spread across different timeslots from each other and in the largest
+available rooms, topics that should appeal to similar subgroups of attendees
+aren't scheduled to conflict with one another, etc.
+
+Check out these photos for a taste of the current analog process:
+- [Voting on proposed discussion topics with sticky notes and stickers](https://www.dropbox.com/s/12js63t40ft7arg/Current_Voting.png?dl=0)
+- [Scheduling the winners on a grid of available session slots](https://www.dropbox.com/s/7oetdc3dzw2xxji/Current_Scheduling.jpeg?dl=0)
+
+This Unscheduler app is meant to mimic the analog process we use at Offline Camp
+by:
+- Allowing event participants to nominate discussion topics (complete)
+- Allowing event participants to vote on proposed topics (complete)
+- Allowing event organizers to open and close proposal and voting periods (complete)
+- Allowing event organizers to easily identify winning sessions (complete)
+- Allowing event organizers to schedule sesions into timeslots (upcoming)
+- Allowing participants to view the final schedule (upcoming)
+
+## Project planning and strategy
+Preparation and planning were key to my success with this project. Here's a look
+at my strategy and process.
+
+### User Stories
+
+These user stories guided my development process:
+
+- PROPOSING (Complete)
+   - As an event attendee or organizer, I want to see a list of all currently proposed sessions so that I don't create a duplicate proposal.
+   - As an event attendee or organizer, after seeing other proposals, I then want to propose a new unconference session topic for everyone to vote on so that my favorite topic will be covered.
+
+- VOTING (Complete)
+   - As an event attendee or organizer, I want to see a list of all proposed sessions so that I can choose how to use my X number of votes.
+   - As an event attendee or organizer, I want to apply my X number of votes to my favorite sessions (either all to one or one/some to multiple) so that my favorite topics are likely to be selected.
+   - As an event organizer, I want to view all proposed sessions with their vote counts to determine which are the winners.
+
+- SCHEDULING & ADMIN (Upcoming)
+   - As an event organizer, I want to add some keywords (such as UX) to winning sessions to help guide my timeslot assignments, ensuring similar sessions aren't scheduled on top of each other.
+   - As an event organizer, I want to add a list of daily timeslots avialable for sessions to create my base schedule.
+   - As an event organizer, I want to add a list of rooms available for discussion sessions to create my base schedule.
+   - As an event organizer, I want to assign each winning session to an available timeslot and room so attendees can see their options.
+   - As an event attendee or organizer, I want to see today's sessions by time, with room indicated for each so I know where to be when.
+
+### Wireframes
+
+These wireframes guided my front-end development:
+
+- [Version 1: Proposing Discussion Topics](https://www.dropbox.com/s/nl6sdmdzpa43d2s/Wireframe_Proposing.JPG?dl=0)
+- [Version 1: Voting on Discussion Topics](https://www.dropbox.com/s/qvnjl3n9g90gpaj/Wireframe_Voting.JPG?dl=0)
+- [Version 2: Scheduling Sessions](https://www.dropbox.com/s/a4tbkn309ca6ws2/Wireframe_SchedulingJPG.JPG?dl=0)
+- [Version 2: Viewing Final Schedule](https://www.dropbox.com/s/6ekkdcyorl2fl6b/Wireframe_Schedule_View.JPG?dl=0)
+
+### Entity Relationship Diagrams
+
+I created the following entity relationship diagrams to map out my relational
+database structure before devloping my API, and adjusted the plan to meet time
+constraints on the project.
+
+[Entity Relationship Diagrams](https://www.dropbox.com/s/1yyfi3xf42ebzg4/Unschedule%20ERDs.jpg?dl=0)
+
+### Work Process
+
+I took a methodical approach to development of the app, first building out each
+SQL table and getting my Rails server up and running via curl scripts before
+adding the related front-end functionality. Here's a look at my project plan.
+I was able to complete my MVP and add additional admin functionality before
+deadline, and have lots of functionality I'd love to add in the future. 
+
+- VERSION 1 / MVP (PROPOSALS & VOTING):
+  - API: Build USERS tables, API, and curl scripts
+  - Client: Implement auth functions
+  - API: Build DISCUSSIONS tables, API, and curl scripts
+  - Client: Implement DISCUSSIONS resource functions (propose, vote)
+  - Style, debug, deploy
+- VERSION 1.5 (Admin)
+  - API: Build event table with single event belonging to admin
+  - Client: Enable admin functions (updating proposing/voting/final status,
+  updating event name and max votes per user, determining winning sessions)
+  - Style, debug, deploy
+  - Update documentation
+- VERSION 2 (SCHEDULING & SCHEDULE VIEW):
+  - API: Build SLOTS tables, API, and curl scripts
+  - Client: Implement SLOTS resource functions (create timeslots, schedule
+    discussions, display final schedule)
+  - Style, debug, deploy
+- VERSION 3 (BETTER SCHEDULING UI):
+  - API: Build TIMESLOTS tables, API, and curl scripts
+  - API: Build ROOMS tables, API, and curl scripts
+  - API: Turn SLOTS into a joins table for ROOMS & TIMESLOTS, re-test
+  - Client: Revise SLOTS/TIMESLOTS/ROOMS resource functions (better UI for
+    adding timeslots and rooms to scheduling engine, incl room capacities)
+  - Style, debug, deploy
+- VERSION 4 (IMPROVED STYLING)
+  - Optimize scheduling features for laptop/tablet horizontal
+  - Optimize proposing/voting for mobile
+  - Style, debug, deploy
