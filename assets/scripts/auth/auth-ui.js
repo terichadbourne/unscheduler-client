@@ -24,9 +24,9 @@ const signInSuccess = function (response) {
   if (store.user.admin) {
     $('.show-admin').removeClass('hidden')
     $('.admin-panel, .hide-admin').addClass('hidden')
-    $("input[name='name']", "input[name='max-votes']").val('')
+    $("input[name='name'], input[name='max_votes']").val('')
     $("input[name='name']").attr('placeholder', store.event.name)
-    $("input[name='max-votes']").attr('placeholder', store.event.max_votes)
+    $("input[name='max_votes']").attr('placeholder', store.event.max_votes)
   } else {
     $('.admin-panel, .hide-admin, .show-admin').addClass('hidden')
   }
@@ -36,9 +36,6 @@ const signInSuccess = function (response) {
   $('.sign-in').addClass('hidden')
   $('.sign-out').removeClass('hidden')
   $('.change-password').removeClass('hidden')
-  // display success message
-  showAuthMessage("Success! You're now signed in!")
-  setTimeout(clearAuthMessage, 3000)
   // clear form fields and hide modal
   clearAuthForms()
   $('#signInModal').modal('hide')
@@ -81,7 +78,6 @@ const signOutSuccess = function (response) {
   $('.login-req').addClass('hidden')
   $('.logout-req').removeClass('hidden')
   // clear messages
-  ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
   $('.voting-instructions, .proposing-instructions').addClass('hidden')
   // change which auth options are available
   $('.sign-up').removeClass('hidden')
@@ -90,9 +86,6 @@ const signOutSuccess = function (response) {
   $('.change-password').addClass('hidden')
   // refresh list of discussions to remove editable status
   discussionsEvents.onGetDiscussions()
-  // show success message
-  showAuthMessage("Success! You've been signed out.")
-  setTimeout(clearAuthMessage, 3000)
 }
 
 // run on sign-out error
