@@ -39,8 +39,8 @@ available rooms, topics that should appeal to similar subgroups of attendees
 aren't scheduled to conflict with one another, etc.
 
 Check out these photos for a taste of the current analog process:
-- [Voting on proposed discussion topics with sticky notes and stickers](https://www.dropbox.com/s/12js63t40ft7arg/Current_Voting.png?dl=0)
-- [Scheduling the winners on a grid of available session slots](https://www.dropbox.com/s/mt0jvgwls6xq6bx/Current_Scheduling.jpeg?dl=0)
+- ![Voting on proposed discussion topics with sticky notes and stickers](public/Current_Voting.png)
+- ![Scheduling the winners on a grid of available session slots](/public/Current_Scheduling.jpeg)
 
 This Unscheduler app is meant to mimic the analog process we use at Offline Camp
 by:
