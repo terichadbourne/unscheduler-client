@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Unscheduler</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+      <body class="container-fluid">
+
+        <!-- nav bar with user auth options -->
+        <nav class="navbar navbar-light bg-light">
+          <span class="navbar-brand">Unscheduler</span>
+          <form class="form-inline justify-content-end">
+            <button class="sign-out hidden btn btn-outline-success" type="button">Sign Out</button>
+            <button class="change-password hidden btn btn-outline-success" data-toggle="modal" data-target="#changePasswordModal" type="button">Change Password</button>
+            <button class="sign-in btn btn-outline-success" data-toggle="modal" data-target="#signInModal" type="button">Sign In</button>
+            <button class="sign-up btn btn-outline-success" data-toggle="modal" data-target="#signUpModal" type="button">Sign Up</button>
+            <button class="show-admin hidden btn btn-outline-success" type="button">Admin Settings</button>
+            <button class="hide-admin hidden btn btn-outline-success" type="button">Hide Settings</button>
+          </form>
+        </nav>
+
+        <main>
+          <p class="auth-alert-main"></p>
+          <div id="message"></div>
+
+          <!-- admin panel shown to admins only -->
+          <section class="admin admin-panel hidden">
+
+            <h3>Top Secret Admin Stuff</h3>
+            <p>Congrats! You have top secret admin clearance!</p>
+            <h4>Pick Winners</h4>
+            <form id="pick-winners-form">
+              <label for="timeslots">Timeslots Available: </label>
+              <input type="number" name="timeslots" min="1" max="10" placeholder="3" required>
+              <br>
+              <label for="rooms">Rooms Available: </label>
+              <input type="number" name="rooms" min="1" max="10" placeholder="3" required>
+              <br>
+              <button class="btn" type="submit" form="pick-winners-form">Calculate Winning Sessions</button>
+            </form>
+            <p class='winners-message'>
+              <!-- to be filled in by pickWinners function -->
+            </p>
+            <table class="table">
+              <tbody class="winners-list">
+                <!-- content to be added via Handlebars in pickWinners function -->
+              </tbody >
+            </table>
+            <h4>Update Event Details</h4>
+            <section class="event-stage">
+              <p>Click to update the stage you're at in the voting process.</p>
+              <div class="event-stage">
+                <button class="stage proposing" data-id="proposals_open">Proposals Open</button>
+                <button class="stage voting" data-id="voting_open">Voting Open</button>
+                <button class="stage final" data-id="schedule_finalized">Schedule Finalized</button>
+              </div>
+            </section>
+            <form id="update-event-name-form">
+              <label for="timeslots">Event name: </label>
+              <input type="text" name="name" required>
+              <button class="btn" type="submit" placeholder="Event Name" form="update-event-name-form">Update Event Name</button>
+            </form>
+            <form id="update-max-votes-form">
+              <label for="max_votes">Votes allowed per attendee: </label>
+              <input type="number" name="max_votes" min="1" max="10" placeholder="5" required>
+              <button class="btn" type="submit" form="update-max-votes-form">Update Max Votes</button>
+            </form>
+          </section>
+
+          <!-- event stage indicator for logged in users -->
+          <h2 id="event-name"></h2>
+          <section class="event-stage login-req hidden">
+            <span class="stage proposing">Proposals Open</span>
+            <span class="stage voting">Voting Open</span>
+            <span class="stage final">Schedule Finalized</span>
+          </section>
+
+          <!-- shown to users who aren't logged in-->
+          <section class="logout-req">
+            <h3>Session Ideas</h3>
+            <p>Log in to propose an idea or vote on sessions.</p>
+            <table class="table table-striped">
+              <tbody class="discussion-list-logged-out">
+              </tbody>
+            </table>
+          </section>
+
+          <!-- shown to logged in user when propsoals are open -->
+          <section class="discussions stage-dependent proposing login-req hidden">
+            <h3>Propose a Session Idea</h3>
+            <p> You can propose an unlimited number of session topics. Click the
+              "Modify" button to edit or delete an idea you've proposed. Once
+              voting begins, you won't be able to edit your proposals.</p>
+            <button class="list-discussions">Refresh List</button>
+            <button class="propose-topic stage-dependent proposing" data-toggle="modal"
+              data-target="#proposeTopicModal" type="button">Propose a Topic</button>
+            <div class="discussion-list-message"></div>
+            <table class="table table-striped">
+              <tbody class="discussion-list-proposing">
+                <!-- content to be added via Handlebars -->
+              </tbody>
+            </table>
+          </section>
+
+          <!-- shown to logged in user when voting is open -->
+          <section class="discussions stage-dependent voting login-req hidden">
+            <h3>Vote for Discussion Topics</h3>
+            <p>You have a maximum of <strong><span id="max-votes">5</span>
+               votes</strong> to cast. You can spread them
+               around or apply multiple votes to a single
+               session. To change a vote, remove it from one session
+              and add it to another. Session ideas can't be modified during
+              the voting period.</p>
+            <button class="list-discussions">Refresh List</button>
+            <div class="discussion-list-message"></div>
+            <table class="table table-striped">
+              <tbody class="discussion-list-voting">
+                <!-- content to be added via Handlebars -->
+              </tbody>
+            </table>
+          </section>
+
+          <!-- shown to logged in user when schedule is finalized -->
+          <section class="discussions stage-dependent final login-req hidden">
+            <h3>Final Schedule</h3>
+            <p>Voting has ended and your awesome event organizers have scheduled
+              the everyone's favorite topics for discussion.</p>
+            <p>Schedules can't be displayed online quite yet,
+            so please check the hard copy schedule at the venue.</p>
+          </section>
+
+        </main>
+        <footer class="row">
+          <p><em>Built by <a href="https://github.com/terichadbourne">Teri Chadbourne</a></em></p>
+        </footer>
+
+        <!-- PROPOSE TOPIC Modal -->
+        <div class="modal fade" id="proposeTopicModal" tabindex="-1" role="dialog" aria-labelledby="proposeTopicModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="proposeTopicModalLabel">Propose Topic</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="propose-topic-form">
+                  <input name="title" placeholder='Session Topic' type='text' required/>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn" type="submit" form="propose-topic-form">Submit Topic Proposal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHANGE TOPIC Modal -->
+        <div class="modal fade" id="updateTopicModal" tabindex="-1" role="dialog" aria-labelledby="updateTopicModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="updateTopicModalLabel">Update Topic</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="update-topic-form">
+                  <!-- content to be added via Handlebars -->
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">Close</button>
+                <button class="btn edit" type="submit" form="update-topic-form">Save Edits</button>
+                <button class="remove btn">Delete Proposal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- CHANGE PASSWORD Modal -->
+        <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="change-password-form">
+                  <input name="passwords[old]" placeholder='Old Password' type='password' required/>
+                  <input name="passwords[new]" placeholder='New Password' type='password' required/>
+                </form>
+                <p class="auth-alert-modal"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn" type="submit" form="change-password-form">Change Password</button>
+                <p class="auth-alert"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIGN IN Modal -->
+        <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="signin-form">
+                  <input name="credentials[email]" placeholder='Email' type='text' required/>
+                  <input name="credentials[password]" placeholder='Password' type='password' required/>
+                <p class="auth-alert-modal"></p>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn" type="submit" form="signin-form">Sign In</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIGN UP Modal -->
+        <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="signup-form">
+                  <input name="credentials[email]" placeholder='Email' type='text' required/>
+                  <input name="credentials[password]" placeholder='Password' type='password' required/>
+                  <input name="credentials[password_confirmation]" placeholder='Password Confirmation' type='password' required/>
+                </form>
+                <p class="auth-alert-modal"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn" type="submit" form="signup-form">Sign Up</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
