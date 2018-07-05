@@ -1,19 +1,19 @@
 # Unscheduler: An unconference scheduling tool
 
 The Unscheduler is an app for managing the voting and scheduling process for
-unconferences, inspired by my work as a co-organizer for [Offline Camp](http://offlinefirst.org/camp). *(Yes, [unconferences have schedules]((https://medium.com/offline-camp/crafting-community-events-that-leave-them-wanting-smore-902974cff4d4)!)*
+unconferences, inspired by my work as a co-organizer for [Offline Camp](http://offlinefirst.org/camp). *(Yes, [unconferences have schedules](https://medium.com/offline-camp/crafting-community-events-that-leave-them-wanting-smore-902974cff4d4)!*
 
 Check out the code or the [live app](https://terichadbourne.github.io/unscheduler-client/)!
 
 * Front-end app
    * [GitHub repo](https://github.com/terichadbourne/unscheduler-client)
-   * [Live site](https://terichadbourne.github.io/unscheduler-client/) (deployed on GitHub) Pages
+   * [Live site](https://terichadbourne.github.io/unscheduler-client/) (deployed on GitHub Pages)
 * Back-end API
    * [GitHub repo](https://github.com/terichadbourne/unscheduler-api)
    * [Live site](https://unscheduler-api.herokuapp.com/) (deployed on Heroku)
 
 ## Technologies used
-  - Front-end technologies
+  - **Front-end technologies**
     - JavaScript
     - jQuery
     - Handlebars
@@ -21,7 +21,7 @@ Check out the code or the [live app](https://terichadbourne.github.io/unschedule
     - HTML5
     - CSS3
     - Sass
-  - Back-end technologies
+  - **Back-end technologies**
     - Ruby on Rails
     - PostgreSQL
     - Active Record
@@ -30,7 +30,7 @@ Check out the code or the [live app](https://terichadbourne.github.io/unschedule
 
 As a member of the [Offline First](http://offlinefirst.org) development
 community, I co-organize an unconference called [Offline Camp](http://offlinefirst.org/camp), where attendees propose topics for
-discussionand then vote to determine what topics are actually discussed in the
+discussion and then vote to determine what topics are actually discussed in the
 limitedtime we have available. As organizers, we take the votes (a sticky note
 for each proposal, with stickers representing votes won) and give some careful
 thought to how to best schedule the winning sessions so that the most popular
@@ -59,16 +59,16 @@ at my strategy and process.
 
 These user stories guided my development process:
 
-- PROPOSING (Complete)
+- **Proposing** (Complete)
    - As an event attendee or organizer, I want to see a list of all currently proposed sessions so that I don't create a duplicate proposal.
    - As an event attendee or organizer, after seeing other proposals, I then want to propose a new unconference session topic for everyone to vote on so that my favorite topic will be covered.
 
-- VOTING (Complete)
+- **Voting** (Complete)
    - As an event attendee or organizer, I want to see a list of all proposed sessions so that I can choose how to use my X number of votes.
    - As an event attendee or organizer, I want to apply my X number of votes to my favorite sessions (either all to one or one/some to multiple) so that my favorite topics are likely to be selected.
    - As an event organizer, I want to view all proposed sessions with their vote counts to determine which are the winners.
 
-- SCHEDULING & ADMIN (Upcoming)
+- **Scheduling & Admin** (Upcoming)
    - As an event organizer, I want to add some keywords (such as UX) to winning sessions to help guide my timeslot assignments, ensuring similar sessions aren't scheduled on top of each other.
    - As an event organizer, I want to add a list of daily timeslots avialable for sessions to create my base schedule.
    - As an event organizer, I want to add a list of rooms available for discussion sessions to create my base schedule.
@@ -98,33 +98,33 @@ I took a methodical approach to development of the app, first building out each
 SQL table and getting my Rails server up and running via curl scripts before
 adding the related front-end functionality. Here's a look at my project plan.
 I was able to complete my MVP and add additional admin functionality before
-deadline, and have lots of functionality I'd love to add in the future. 
+deadline, and I have lots of functionality I'd still love to add in the future.
 
-- VERSION 1 / MVP (PROPOSALS & VOTING):
+- **Version 1 / MVP (Proposals & Voting)**:
   - API: Build USERS tables, API, and curl scripts
   - Client: Implement auth functions
   - API: Build DISCUSSIONS tables, API, and curl scripts
   - Client: Implement DISCUSSIONS resource functions (propose, vote)
   - Style, debug, deploy
-- VERSION 1.5 (Admin)
-  - API: Build event table with single event belonging to admin
-  - Client: Enable admin functions (updating proposing/voting/final status,
+- **Version 1.5 (Event Admin)**
+  - API: Build EVENT table with single event belonging to admin
+  - Client: Enable EVENT admin functions (updating proposing/voting/final status,
   updating event name and max votes per user, determining winning sessions)
   - Style, debug, deploy
   - Update documentation
-- VERSION 2 (SCHEDULING & SCHEDULE VIEW):
+- **Version 2 (Scheduling & Schedule View)**:
   - API: Build SLOTS tables, API, and curl scripts
   - Client: Implement SLOTS resource functions (create timeslots, schedule
     discussions, display final schedule)
   - Style, debug, deploy
-- VERSION 3 (BETTER SCHEDULING UI):
+- **Version 3 (Better Scheduling UI)**:
   - API: Build TIMESLOTS tables, API, and curl scripts
   - API: Build ROOMS tables, API, and curl scripts
   - API: Turn SLOTS into a joins table for ROOMS & TIMESLOTS, re-test
   - Client: Revise SLOTS/TIMESLOTS/ROOMS resource functions (better UI for
     adding timeslots and rooms to scheduling engine, incl room capacities)
   - Style, debug, deploy
-- VERSION 4 (IMPROVED STYLING)
+- **Version 4 (Improved Styling)**
   - Optimize scheduling features for laptop/tablet horizontal
   - Optimize proposing/voting for mobile
   - Style, debug, deploy
