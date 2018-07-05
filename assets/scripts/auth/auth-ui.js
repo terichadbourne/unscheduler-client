@@ -24,6 +24,9 @@ const signInSuccess = function (response) {
   if (store.user.admin) {
     $('.show-admin').removeClass('hidden')
     $('.admin-panel, .hide-admin').addClass('hidden')
+    $("input[name='name']", "input[name='max-votes']").val('')
+    $("input[name='name']").attr('placeholder', store.event.name)
+    $("input[name='max-votes']").attr('placeholder', store.event.max_votes)
   } else {
     $('.admin-panel, .hide-admin, .show-admin').addClass('hidden')
   }

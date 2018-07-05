@@ -1,6 +1,6 @@
 'use strict'
 
-// const getFormFields = require('../../../lib/get-form-fields')
+const getFormFields = require('../../../lib/get-form-fields')
 const eventsUi = require('./events-ui')
 const eventsApi = require('./events-api')
 const store = require('../store')
@@ -10,9 +10,13 @@ const config = require('../config')
 const addHandlers = function () {
   // $('#update-event-form').on('submit', onUpdateEvent)
   $('button.stage').on('click', onUpdateStage)
+  $('#update-event-name-form, #update-max-votes-form').on('submit', onUpdateEvent)
   $('.show-admin').on('click', () => {
     $('.admin-panel, .hide-admin').removeClass('hidden')
     $('.show-admin').addClass('hidden')
+    $("input[name='name']", "input[name='max_votes']").val('')
+    $("input[name='name']").attr('placeholder', store.event.name)
+    $("input[name='max_votes']").attr('placeholder', store.event.max_votes)
   })
   $('.hide-admin').on('click', () => {
     $('.admin-panel, .hide-admin').addClass('hidden')
@@ -22,7 +26,7 @@ const addHandlers = function () {
 
 const onGetEvent = function () {
   console.log('in onGetEvent')
-  // make API call for the default (and only) event, whose id is stored in config
+  // make API call for the default (and only) event (id stored in config)
   eventsApi.getEvent(config.eventId)
     .then(eventsUi.getEventSuccess)
     .catch(eventsUi.getEventError)
@@ -64,6 +68,22 @@ const onUpdateStage = function (event) {
     .catch(eventsUi.updateEventError)
 }
 
+// updates a single key (not radio button)
+const onUpdateEvent = function (event) {
+  event.preventDefault()
+  console.log('in onUpdateEvent')
+  const formData = getFormFields(event.target)
+  console.log('in onUpdateEvent and formData is: ', formData)
+  const data = setDefaultData()
+  const key = Object.keys(formData)[0]
+  console.log('key is : ', key)
+  data.event[`${key}`] = formData[`${key}`]
+  console.log('revised data with new event name: ', data)
+  eventsApi.updateEvent(data)
+    .then(eventsUi.updateEventSuccess)
+    .catch(eventsUi.updateEventError)
+}
+
 // const onUpdateEvent = function (event) {
 //   // prevent page refresh
 //   event.preventDefault()
@@ -77,7 +97,7 @@ const onUpdateStage = function (event) {
 
 module.exports = {
   addHandlers: addHandlers,
-  // onUpdateEvent: onUpdateEvent,
+  onUpdateEvent: onUpdateEvent,
   onGetEvent: onGetEvent,
   setDefaultData: setDefaultData,
   onUpdateStage: onUpdateStage
