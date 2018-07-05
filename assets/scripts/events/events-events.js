@@ -25,7 +25,6 @@ const addHandlers = function () {
 }
 
 const onGetEvent = function () {
-  console.log('in onGetEvent')
   // make API call for the default (and only) event (id stored in config)
   eventsApi.getEvent(config.eventId)
     .then(eventsUi.getEventSuccess)
@@ -35,8 +34,6 @@ const onGetEvent = function () {
 const setDefaultData = function () {
   // const eventId = store.event.id
   // const adminId = store.event.user
-  console.log('inSetDefaultData')
-  console.log(store.event)
   const data = {}
   data.event = {
     name: store.event.name,
@@ -46,23 +43,19 @@ const setDefaultData = function () {
     schedule_finalized: store.event.schedule_finalized,
     user_id: store.event.user
   }
-  console.log('data is: ', data)
   return data
 }
 
 const onUpdateStage = function (event) {
   // grab previous data
   const data = setDefaultData()
-  console.log('in onChangeStage and data is: ', data)
   const newStage = $(event.target).data('id')
-  console.log('new stage is: ', newStage)
   // set all stages to false
   data.event.proposals_open = false
   data.event.voting_open = false
   data.event.schedule_finalized = false
   // then set the selected stage to true
   data.event[newStage] = true
-  console.log('revised data with new stage: ', data)
   eventsApi.updateEvent(data)
     .then(eventsUi.updateEventSuccess)
     .catch(eventsUi.updateEventError)
@@ -71,14 +64,10 @@ const onUpdateStage = function (event) {
 // updates a single key (not radio button)
 const onUpdateEvent = function (event) {
   event.preventDefault()
-  console.log('in onUpdateEvent')
   const formData = getFormFields(event.target)
-  console.log('in onUpdateEvent and formData is: ', formData)
   const data = setDefaultData()
   const key = Object.keys(formData)[0]
-  console.log('key is : ', key)
   data.event[`${key}`] = formData[`${key}`]
-  console.log('revised data with new event name: ', data)
   eventsApi.updateEvent(data)
     .then(eventsUi.updateEventSuccess)
     .catch(eventsUi.updateEventError)
