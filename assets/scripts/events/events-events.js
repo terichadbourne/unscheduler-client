@@ -14,7 +14,7 @@ const addHandlers = function () {
   $('.show-admin').on('click', () => {
     $('.admin-panel, .hide-admin').removeClass('hidden')
     $('.show-admin').addClass('hidden')
-    $("input[name='name']", "input[name='max_votes']").val('')
+    $("input[name='name'], input[name='max_votes']").val('')
     $("input[name='name']").attr('placeholder', store.event.name)
     $("input[name='max_votes']").attr('placeholder', store.event.max_votes)
   })
@@ -83,17 +83,6 @@ const onUpdateEvent = function (event) {
     .then(eventsUi.updateEventSuccess)
     .catch(eventsUi.updateEventError)
 }
-
-// const onUpdateEvent = function (event) {
-//   // prevent page refresh
-//   event.preventDefault()
-//   console.log('in onUpdateEvent')
-//   console.log('event.target is ', event.target)
-//   console.log('event.target.form is ', event.target.form)
-//   const data = {}
-//   data.event = getFormFields(event.target)
-//   console.log('data.event is: ', data.event)
-// }
 
 module.exports = {
   addHandlers: addHandlers,
