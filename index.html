@@ -38,12 +38,12 @@
             <h4>Pick Winners</h4>
             <form id="pick-winners-form">
               <label for="timeslots">Timeslots Available: </label>
-              <input type="number" name="timeslots" min="1" max="10" required>
+              <input type="number" name="timeslots" min="1" max="10" placeholder="3" required>
               <br>
               <label for="rooms">Rooms Available: </label>
-              <input type="number" name="rooms" min="1" max="10" required>
+              <input type="number" name="rooms" min="1" max="10" placeholder="3" required>
               <br>
-              <button class="btn btn-primary" type="submit" form="pick-winners-form">Calculate Winning Sessions</button>
+              <button class="btn" type="submit" form="pick-winners-form">Calculate Winning Sessions</button>
             </form>
             <p class='winners-message'>
               <!-- to be filled in by pickWinners function -->
@@ -65,12 +65,12 @@
             <form id="update-event-name-form">
               <label for="timeslots">Event name: </label>
               <input type="text" name="name" required>
-              <button class="btn btn-primary" type="submit" form="update-event-name-form">Update Event Name</button>
+              <button class="btn" type="submit" placeholder="Event Name" form="update-event-name-form">Update Event Name</button>
             </form>
             <form id="update-max-votes-form">
               <label for="max_votes">Votes allowed per attendee: </label>
-              <input type="number" name="max_votes" min="1" max="10" required><br>
-              <button class="btn btn-primary" type="submit" form="update-max-votes-form">Update Max Votes</button>
+              <input type="number" name="max_votes" min="1" max="10" placeholder="5" required>
+              <button class="btn" type="submit" form="update-max-votes-form">Update Max Votes</button>
             </form>
           </section>
 
@@ -99,7 +99,7 @@
               "Modify" button to edit or delete an idea you've proposed. Once
               voting begins, you won't be able to edit your proposals.</p>
             <button class="list-discussions">Refresh List</button>
-            <button class="propose-topic" data-toggle="modal"
+            <button class="propose-topic stage-dependent proposing" data-toggle="modal"
               data-target="#proposeTopicModal" type="button">Propose a Topic</button>
             <div class="discussion-list-message"></div>
             <table class="table table-striped">
@@ -158,7 +158,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" form="propose-topic-form">Submit Topic Proposal</button>
+                <button class="btn" type="submit" form="propose-topic-form">Submit Topic Proposal</button>
               </div>
             </div>
           </div>
@@ -208,7 +208,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" form="change-password-form">Change Password</button>
+                <button class="btn" type="submit" form="change-password-form">Change Password</button>
                 <p class="auth-alert"></p>
               </div>
             </div>
@@ -234,7 +234,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" form="signin-form">Sign In</button>
+                <button class="btn" type="submit" form="signin-form">Sign In</button>
               </div>
             </div>
           </div>
@@ -260,7 +260,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit" form="signup-form">Sign Up</button>
+                  <button class="btn" type="submit" form="signup-form">Sign Up</button>
                 </div>
             </div>
           </div>

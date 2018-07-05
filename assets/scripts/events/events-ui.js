@@ -9,7 +9,6 @@ const getEventSuccess = function (response) {
   store.event = response.event
   console.log('store.event: ', store.event)
   const eventStage = response.event.stage
-  console.log('eventStage :, eventStage')
   updateStage(eventStage)
 }
 
@@ -23,6 +22,9 @@ const updateStage = function (stage) {
   $(`.${stage}`).removeClass('hidden')
   $(`.event-stage .stage`).removeClass('highlight')
   $(`.event-stage .${stage}`).addClass('highlight')
+  $("input[name='name']", "input[name='max_votes']").val('')
+  $("input[name='name']").attr('placeholder', store.event.name)
+  $("input[name='max_votes']").attr('placeholder', store.event.max_votes)
 }
 
 const getEventError = function (error) {

@@ -171,12 +171,10 @@ button.stage.highlight {
   text-align: center;
 }
 
-#pick-winners-form input {
-  color: black;
-  display: inline;
-}
-
-#update-event-form input {
+#pick-winners-form input,
+#update-event-form input,
+#update-event-name-form input,
+#update-max-votes-form input {
   color: black;
   display: inline;
 }
