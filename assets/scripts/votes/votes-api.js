@@ -18,7 +18,6 @@ const createVote = function (data) {
 
 // make a call to server to delete a vote
 const deleteVote = function (id) {
-  console.log('in deleteVote trying to delete id: ', id)
   return $.ajax({
     method: 'DELETE',
     url: config.apiUrl + `/votes/${id}`,

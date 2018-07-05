@@ -7,6 +7,7 @@ const discussionsApi = require('../discussions/discussions-api')
 const votesUi = require('./votes-ui')
 const votesApi = require('./votes-api')
 const store = require('../store')
+const ui = require('../ui')
 
 // event handlers for...
 const addHandlers = function () {
@@ -16,24 +17,15 @@ const addHandlers = function () {
 }
 
 const onDeleteVote = function (event) {
-  console.log('in onDeleteVote')
   if (!store.user) {
-    console.log("no user signed in so can't delete vote")
   } else {
     const discussionId = $(event.target).data('id')
     const userId = store.user.id
-    console.log('user_id is: ', userId)
-    console.log('discussion_id is: ', discussionId)
-    console.log('store.user.votes is: ', store.user.votes)
-    console.log('store.discussions is: ', store.discussions)
     const matchedDiscussion = store.discussions.find(discussion => discussion.id === discussionId)
-    console.log('matchedDiscussion: ', matchedDiscussion)
     // find the first vote for the current user which is for the session clicked
     const matchedVote = matchedDiscussion.votes.find(vote => vote.user_id === userId)
     if (matchedVote) {
-      console.log('matchedVote: ', matchedVote)
       const id = matchedVote.id
-      console.log('vote id sought is', id)
       votesApi.deleteVote(id)
       // if delete vote is successful, immediately run getDiscussions to update
       // list, calling that function's success function
@@ -42,25 +34,20 @@ const onDeleteVote = function (event) {
         // if delete fails, use own error function
         .catch(votesUi.createVoteError)
     } else {
-      console.log('this user has no votes to delete for that session')
+      ui.showMessage('You have no votes to delete for that session')
     }
   }
 }
 
 // refresh discussion list
 const onCreateVote = function (event) {
-  console.log('in onCreateVote')
-  console.log("$(event.target).data('id') is: ", $(event.target).data('id'))
   // capture user credentials from form and send to server
   if (!store.user) {
-    console.log("no user signed in so can't create vote")
   } else {
-    console.log('store.user.id is: ', store.user.id)
     const data = {}
     data.vote = {}
     data.vote.user_id = store.user.id
     data.vote.discussion_id = $(event.target).data('id')
-    console.log('data is: ', data)
     // send request to server
     votesApi.createVote(data)
     // if create vote is successful, immediately run getVotes to
@@ -74,18 +61,13 @@ const onCreateVote = function (event) {
 
 const pickWinners = function (event) {
   event.preventDefault()
-  console.log('in pickWinners')
   const data = getFormFields(event.target)
-  console.log('data from form is: ', data)
   const slots = data.timeslots * data.rooms
-  console.log('total slots available: ', slots)
   discussionsApi.getDiscussions()
     .then((response) => {
       const discussions = response.discussions
-      console.log('discussions before sort: ', discussions)
       // sort array so discussions with the most votes come first
       discussions.sort((a, b) => { return b.votes.length - a.votes.length })
-      console.log('discussions after sort: ', discussions)
       let proposedWinners = []
       if (discussions.length <= slots) {
         $('.winners-message').html(`You have ${slots} session slots to fill and
@@ -118,7 +100,6 @@ const pickWinners = function (event) {
             for your ${slots} session slots.`)
         }
       }
-      console.log('proposed winners: ', proposedWinners)
       const showWinnersHtml = showWinnersTemplate({ discussions: proposedWinners })
       $('.winners-list').html(showWinnersHtml)
     })

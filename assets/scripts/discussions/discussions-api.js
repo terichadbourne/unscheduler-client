@@ -30,7 +30,6 @@ const updateDiscussion = function (data) {
 
 // make a call to server to delete a discussion
 const deleteDiscussion = function (id) {
-  console.log('in deleteDiscussion trying to delete id: ', id)
   return $.ajax({
     method: 'DELETE',
     url: config.apiUrl + `/discussions/${id}`,
@@ -60,10 +59,7 @@ const getDiscussion = function (id) {
 
 // make a call to server to get all discussions
 const getDiscussions = function () {
-  console.log('in getDiscussions')
-
   if (store.user) {
-    console.log('sending token with request')
     return $.ajax({
       method: 'GET',
       url: config.apiUrl + `/discussions/`,
@@ -72,7 +68,6 @@ const getDiscussions = function () {
       }
     })
   } else {
-    console.log('no token to send with request')
     return $.ajax({
       method: 'GET',
       url: config.apiUrl + `/discussions/`

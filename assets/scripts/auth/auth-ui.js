@@ -7,7 +7,7 @@ const eventsEvents = require('../events/events-events')
 
 // run on sign up error
 const signUpError = function (error) {
-  showAuthMessage('That email is already taken. Please pick a new one or sign in to an existing account instead.')
+  showAuthErrorMessage('That email is already taken. Please pick a new one or sign in to an existing account instead.')
   clearAuthForms()
 }
 
@@ -21,24 +21,21 @@ const signInSuccess = function (response) {
   $('.logout-req').addClass('hidden')
   // store data retricved from server
   store.user = response.user
+  // show relevant admin details if user is authorized
   if (store.user.admin) {
     $('.show-admin').removeClass('hidden')
     $('.admin-panel, .hide-admin').addClass('hidden')
-    $("input[name='name']", "input[name='max-votes']").val('')
-    $("input[name='name']").attr('placeholder', store.event.name)
-    $("input[name='max-votes']").attr('placeholder', store.event.max_votes)
+    $("input[name='name'], input[name='max_votes']").val('')
+    $("input[name='name']").attr('placeholder', store.user.events[0].name)
+    $("input[name='max_votes']").attr('placeholder', store.user.events[0].max_votes)
   } else {
     $('.admin-panel, .hide-admin, .show-admin').addClass('hidden')
   }
-  console.log('store.user is: ', store.user)
   // change which auth options are available
   $('.sign-up').addClass('hidden')
   $('.sign-in').addClass('hidden')
   $('.sign-out').removeClass('hidden')
   $('.change-password').removeClass('hidden')
-  // display success message
-  showAuthMessage("Success! You're now signed in!")
-  setTimeout(clearAuthMessage, 3000)
   // clear form fields and hide modal
   clearAuthForms()
   $('#signInModal').modal('hide')
@@ -50,14 +47,14 @@ const signInSuccess = function (response) {
 // run on sign-in error
 const signInError = function (error) {
   // display error message and clear form fields
-  showAuthMessage('Email or password was incorrect. Please try again or sign up for a new account instead.')
+  showAuthErrorMessage('Email or password was incorrect. Please try again or sign up for a new account instead.')
   clearAuthForms()
 }
 
 // run on successful password change (note no response expected from server)
 const changePasswordSuccess = function (response) {
   // diplay success message
-  showAuthMessage('Success! Your password has been changed!')
+  showAuthSuccessMessage('Success! Your password has been changed!')
   setTimeout(clearAuthMessage, 3000)
   // clear form fields and hide modal
   clearAuthForms()
@@ -67,7 +64,7 @@ const changePasswordSuccess = function (response) {
 // run password change fails
 const changePasswordError = function (error) {
   // display error message and clear form fields
-  showAuthMessage('Oops! Please correct your old password and try again.')
+  showAuthErrorMessage('Oops! Please correct your old password and try again.')
   clearAuthForms()
 }
 
@@ -81,7 +78,6 @@ const signOutSuccess = function (response) {
   $('.login-req').addClass('hidden')
   $('.logout-req').removeClass('hidden')
   // clear messages
-  ui.showMessage("Want to add or edit a session topic? You'll need to sign in.")
   $('.voting-instructions, .proposing-instructions').addClass('hidden')
   // change which auth options are available
   $('.sign-up').removeClass('hidden')
@@ -90,22 +86,22 @@ const signOutSuccess = function (response) {
   $('.change-password').addClass('hidden')
   // refresh list of discussions to remove editable status
   discussionsEvents.onGetDiscussions()
-  // show success message
-  showAuthMessage("Success! You've been signed out.")
-  setTimeout(clearAuthMessage, 3000)
 }
 
 // run on sign-out error
 const signOutError = function (error) {
   // show error and clear auth forms
-  showAuthMessage("Something went wrong. You're still logged in. Quick, show this error message to the nearest developer: ", error)
+  showAuthErrorMessage("Something went wrong. You're still logged in. Quick, show this error message to the nearest developer: ", error)
   clearAuthForms()
 }
 
 // display a message to the user on main screen and in modal
-const showAuthMessage = function (message) {
-  $('.auth-alert-main').html(message).removeClass('hidden')
+const showAuthErrorMessage = function (message) {
   $('.auth-alert-modal').html(message).removeClass('hidden')
+}
+
+const showAuthSuccessMessage = function (message) {
+  $('.auth-alert-main').html(message).removeClass('hidden')
 }
 
 // remove message currently displayed to user
@@ -127,7 +123,8 @@ module.exports = {
   changePasswordError: changePasswordError,
   signOutSuccess: signOutSuccess,
   signOutError: signOutError,
-  showAuthMessage: showAuthMessage,
+  showAuthErrorMessage: showAuthErrorMessage,
+  showAuthSuccessMessage: showAuthSuccessMessage,
   clearAuthMessage: clearAuthMessage,
   clearAuthForms: clearAuthForms
 }
