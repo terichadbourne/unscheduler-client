@@ -29,6 +29,7 @@ const addHandlers = function () {
 const onSignUp = function (event) {
   // prevent page refresh
   event.preventDefault()
+  authUi.clearAuthMessage()
   // capture user credentials from form and send to server
   const data = getFormFields(event.target)
   authApi.signUp(data)
@@ -55,6 +56,7 @@ const onSignUp = function (event) {
 const onSignIn = function (event) {
   // prevent page refresh
   event.preventDefault()
+  authUi.clearAuthMessage()
   // capture user credentials from form and send to server
   const data = getFormFields(event.target)
   authApi.signIn(data)
@@ -70,6 +72,7 @@ const onSignIn = function (event) {
 const onChangePassword = function (event) {
   // prevent page refresh
   event.preventDefault()
+  authUi.clearAuthMessage()
   // capture user credentials from form and send to server
   const data = getFormFields(event.target)
   authApi.changePassword(data)
@@ -85,6 +88,7 @@ const onChangePassword = function (event) {
 const onSignOut = function (event) {
   // prevent page refresh
   event.preventDefault()
+  authUi.clearAuthMessage()
   // send request to server
   authApi.signOut()
     .then(authUi.signOutSuccess)
