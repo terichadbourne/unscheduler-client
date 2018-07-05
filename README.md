@@ -1,15 +1,15 @@
 # Unscheduler: An unconference scheduling tool
 
 The Unscheduler is an app for managing the voting and scheduling process for
-unconferences, inspired by my work as a co-organizer for [Offline Camp](http://offlinefirst.org/camp). *(Yes, [unconferences have schedules](https://medium.com/offline-camp/crafting-community-events-that-leave-them-wanting-smore-902974cff4d4)!*
+unconferences, inspired by my work as a co-organizer for [Offline Camp](http://offlinefirst.org/camp). *(Yes, [unconferences have schedules](https://medium.com/offline-camp/crafting-community-events-that-leave-them-wanting-smore-902974cff4d4)!)*
 
-Check out the code or the [live app](https://terichadbourne.github.io/unscheduler-client/)!
+**Check out the code or the [live app](https://terichadbourne.github.io/unscheduler-client/)!**
 
-* Front-end app
-   * [GitHub repo](https://github.com/terichadbourne/unscheduler-client)
+* Front-end client
+   * [GitHub repo](https://github.com/terichadbourne/unscheduler-client) (unscheduler-client)
    * [Live site](https://terichadbourne.github.io/unscheduler-client/) (deployed on GitHub Pages)
 * Back-end API
-   * [GitHub repo](https://github.com/terichadbourne/unscheduler-api)
+   * [GitHub repo](https://github.com/terichadbourne/unscheduler-api) (unscheduler-api)
    * [Live site](https://unscheduler-api.herokuapp.com/) (deployed on Heroku)
 
 ## Technologies used
@@ -100,7 +100,7 @@ adding the related front-end functionality. Here's a look at my project plan.
 I was able to complete my MVP and add additional admin functionality before
 deadline, and I have lots of functionality I'd still love to add in the future.
 
-- **Version 1 / MVP (Proposals & Voting)**:
+- **Version 1 / MVP (Proposals & Voting)**
   - API: Build USERS tables, API, and curl scripts
   - Client: Implement auth functions
   - API: Build DISCUSSIONS tables, API, and curl scripts
@@ -112,12 +112,12 @@ deadline, and I have lots of functionality I'd still love to add in the future.
   updating event name and max votes per user, determining winning sessions)
   - Style, debug, deploy
   - Update documentation
-- **Version 2 (Scheduling & Schedule View)**:
+- **Version 2 (Scheduling & Schedule View)**
   - API: Build SLOTS tables, API, and curl scripts
   - Client: Implement SLOTS resource functions (create timeslots, schedule
     discussions, display final schedule)
   - Style, debug, deploy
-- **Version 3 (Better Scheduling UI)**:
+- **Version 3 (Better Scheduling UI)**
   - API: Build TIMESLOTS tables, API, and curl scripts
   - API: Build ROOMS tables, API, and curl scripts
   - API: Turn SLOTS into a joins table for ROOMS & TIMESLOTS, re-test
